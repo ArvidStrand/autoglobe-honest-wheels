@@ -53,7 +53,7 @@ export const Route = createFileRoute("/biler/$id")({
 });
 
 function CarDetail() {
-  const { car } = Route.useLoaderData();
+  const { car } = Route.useLoaderData() as { car: (typeof cars)[number] };
   const related = cars.filter((c) => c.id !== car.id).slice(0, 3);
 
   return (
