@@ -82,7 +82,7 @@ function CarDetail() {
                     { l: "Km stand", v: formatKm(car.mileageKm) },
                     { l: "Drivstoff", v: car.fuel },
                     { l: "Girkasse", v: car.transmission },
-                  ].map((f) => (
+                  ].map((f: { l: string; v: string | number }) => (
                     <div key={f.l}>
                       <dt className="text-xs uppercase tracking-widest text-muted-foreground">{f.l}</dt>
                       <dd className="mt-1 text-lg font-medium text-foreground">{f.v}</dd>
@@ -110,7 +110,7 @@ function CarDetail() {
                 <section className="mt-12">
                   <h2 className="text-2xl font-semibold">Spesifikasjoner</h2>
                   <dl className="mt-6 divide-y divide-hairline border-y border-hairline">
-                    {car.specs.map((s) => (
+                    {car.specs.map((s: { label: string; value: string }) => (
                       <div key={s.label} className="flex justify-between py-3 text-sm">
                         <dt className="text-muted-foreground">{s.label}</dt>
                         <dd className="font-medium text-foreground text-right">{s.value}</dd>

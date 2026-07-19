@@ -9,38 +9,148 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SelgRouteImport } from './routes/selg'
+import { Route as OmOssRouteImport } from './routes/om-oss'
+import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BilerIndexRouteImport } from './routes/biler.index'
+import { Route as BilerIdRouteImport } from './routes/biler.$id'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SelgRoute = SelgRouteImport.update({
+  id: '/selg',
+  path: '/selg',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OmOssRoute = OmOssRouteImport.update({
+  id: '/om-oss',
+  path: '/om-oss',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BilerIndexRoute = BilerIndexRouteImport.update({
+  id: '/biler/',
+  path: '/biler/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BilerIdRoute = BilerIdRouteImport.update({
+  id: '/biler/$id',
+  path: '/biler/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/kontakt': typeof KontaktRoute
+  '/om-oss': typeof OmOssRoute
+  '/selg': typeof SelgRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/biler/$id': typeof BilerIdRoute
+  '/biler/': typeof BilerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/kontakt': typeof KontaktRoute
+  '/om-oss': typeof OmOssRoute
+  '/selg': typeof SelgRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/biler/$id': typeof BilerIdRoute
+  '/biler': typeof BilerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/kontakt': typeof KontaktRoute
+  '/om-oss': typeof OmOssRoute
+  '/selg': typeof SelgRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/biler/$id': typeof BilerIdRoute
+  '/biler/': typeof BilerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/kontakt'
+    | '/om-oss'
+    | '/selg'
+    | '/sitemap.xml'
+    | '/biler/$id'
+    | '/biler/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/kontakt'
+    | '/om-oss'
+    | '/selg'
+    | '/sitemap.xml'
+    | '/biler/$id'
+    | '/biler'
+  id:
+    | '__root__'
+    | '/'
+    | '/kontakt'
+    | '/om-oss'
+    | '/selg'
+    | '/sitemap.xml'
+    | '/biler/$id'
+    | '/biler/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  KontaktRoute: typeof KontaktRoute
+  OmOssRoute: typeof OmOssRoute
+  SelgRoute: typeof SelgRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  BilerIdRoute: typeof BilerIdRoute
+  BilerIndexRoute: typeof BilerIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/selg': {
+      id: '/selg'
+      path: '/selg'
+      fullPath: '/selg'
+      preLoaderRoute: typeof SelgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/om-oss': {
+      id: '/om-oss'
+      path: '/om-oss'
+      fullPath: '/om-oss'
+      preLoaderRoute: typeof OmOssRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +158,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/biler/': {
+      id: '/biler/'
+      path: '/biler'
+      fullPath: '/biler/'
+      preLoaderRoute: typeof BilerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/biler/$id': {
+      id: '/biler/$id'
+      path: '/biler/$id'
+      fullPath: '/biler/$id'
+      preLoaderRoute: typeof BilerIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  KontaktRoute: KontaktRoute,
+  OmOssRoute: OmOssRoute,
+  SelgRoute: SelgRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  BilerIdRoute: BilerIdRoute,
+  BilerIndexRoute: BilerIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
