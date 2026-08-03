@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
+import { Reveal } from "@/components/site/Reveal";
 import { company } from "@/lib/company";
 import gl350 from "@/assets/gl350.asset.json";
 
@@ -20,24 +21,31 @@ function AboutPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-24 md:pt-32 pb-20 md:pb-28">
+      <main className="section-top pb-24 md:pb-36">
         <div className="container-page">
-          <div className="max-w-3xl">
-            <p className="text-xs uppercase tracking-widest text-brand font-medium">Om Auto Globe AS</p>
-            <h1 className="mt-3 text-4xl md:text-6xl font-semibold tracking-tight">
+          <Reveal className="max-w-4xl">
+            <p className="eyebrow">Om Auto Globe AS</p>
+            <h1 className="mt-5 text-[40px] sm:text-6xl md:text-[68px] font-semibold tracking-[-0.035em] leading-[1.04]">
               Lokal bruktbilforhandler med et enkelt løfte: ærlighet.
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+            <p className="mt-8 text-lg md:text-xl text-muted-foreground leading-[1.8] max-w-[58ch]">
               Auto Globe AS drives fra Sulfatveien 29 i Torp. Vi har mange års erfaring
               fra bilbransjen, og har spesialisert oss på rimelige bruktbiler av god kvalitet.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-hairline shadow-card">
-              <img src={gl350.url} alt="Auto Globe AS – bruktbil" className="h-full w-full object-cover" loading="lazy" />
-            </div>
-            <div className="space-y-5 text-muted-foreground text-lg leading-relaxed">
+          <div className="mt-20 md:mt-28 grid gap-14 lg:gap-20 lg:grid-cols-2 lg:items-center">
+            <Reveal>
+              <div className="aspect-[4/3] overflow-hidden rounded-[28px] border border-hairline shadow-float">
+                <img
+                  src={gl350.url}
+                  alt="Auto Globe AS – bruktbil"
+                  className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
+                  loading="lazy"
+                />
+              </div>
+            </Reveal>
+            <Reveal delay={120} className="space-y-7 text-lg text-muted-foreground leading-[1.8] max-w-[54ch]">
               <p>
                 Vi tror på personlig og direkte kundekontakt. Når du kommer innom oss,
                 møter du eier <span className="text-foreground font-medium">{company.owner}</span> — ikke en avdeling.
@@ -50,13 +58,13 @@ function AboutPage() {
                 Målet vårt er enkelt: du skal føle deg trygg fra første telefonsamtale
                 til nøkkelen ligger i hånden din.
               </p>
-            </div>
+            </Reveal>
           </div>
 
-          <div className="mt-20 grid gap-8 sm:grid-cols-3 border-t border-hairline pt-12">
-            <Value title="Ærlighet" body="Vi selger bilene slik de er. Ingen skjulte overraskelser." />
-            <Value title="Kvalitet" body="Nøye utvalgte biler som er kontrollert før levering." />
-            <Value title="Personlig service" body="Direkte kontakt med eier — hele veien." />
+          <div className="mt-24 md:mt-32 grid gap-12 md:gap-10 sm:grid-cols-3 border-t border-hairline pt-16">
+            <Value index="01" title="Ærlighet" body="Vi selger bilene slik de er. Ingen skjulte overraskelser." />
+            <Value index="02" title="Kvalitet" body="Nøye utvalgte biler som er kontrollert før levering." />
+            <Value index="03" title="Personlig service" body="Direkte kontakt med eier — hele veien." />
           </div>
         </div>
       </main>
@@ -65,11 +73,12 @@ function AboutPage() {
   );
 }
 
-function Value({ title, body }: { title: string; body: string }) {
+function Value({ index, title, body }: { index: string; title: string; body: string }) {
   return (
-    <div>
-      <h3 className="text-xl font-semibold">{title}</h3>
-      <p className="mt-2 text-muted-foreground leading-relaxed">{body}</p>
-    </div>
+    <Reveal>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">{index}</p>
+      <h2 className="mt-4 text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
+      <p className="mt-3 text-muted-foreground leading-[1.75] max-w-[36ch]">{body}</p>
+    </Reveal>
   );
 }
