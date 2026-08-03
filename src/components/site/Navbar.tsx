@@ -28,25 +28,36 @@ export function Navbar({ transparentOverHero = false }: { transparentOverHero?: 
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
         solid
-          ? "bg-background/90 backdrop-blur-md border-b border-hairline"
-          : "bg-transparent",
+          ? "bg-background/75 backdrop-blur-xl border-b border-hairline shadow-[0_1px_0_0_rgb(15_15_15/0.02)]"
+          : "bg-transparent border-b border-transparent",
       )}
     >
-      <div className="container-page flex h-16 items-center justify-between md:h-20">
-        <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-          <Logo className={cn("h-8 w-auto md:h-10 transition", solid ? "" : "brightness-0 invert")} />
+      <div
+        className={cn(
+          "container-page flex items-center justify-between transition-[height] duration-500",
+          scrolled ? "h-[76px] md:h-[88px]" : "h-20 md:h-28",
+        )}
+      >
+        <Link to="/" className="flex items-center" onClick={() => setOpen(false)}>
+          <Logo
+            className={cn(
+              "w-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+              scrolled ? "h-11 md:h-14" : "h-12 md:h-16",
+            )}
+          />
+
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-10 lg:gap-12">
           {nav.map((n) => (
             <Link
               key={n.to}
               to={n.to}
               className={cn(
-                "text-sm font-medium transition-colors",
-                solid ? "text-foreground/80 hover:text-foreground" : "text-white/85 hover:text-white",
+                "relative text-[15px] font-medium tracking-tight transition-colors duration-250 after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-brand after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100",
+                solid ? "text-foreground/75 hover:text-foreground" : "text-white/80 hover:text-white",
               )}
               activeProps={{ className: solid ? "text-foreground" : "text-white" }}
             >
@@ -55,60 +66,58 @@ export function Navbar({ transparentOverHero = false }: { transparentOverHero?: 
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
           <a
             href={company.phoneHref}
             className={cn(
-              "inline-flex items-center gap-2 text-sm font-medium transition-colors",
-              solid ? "text-foreground/80 hover:text-foreground" : "text-white/90 hover:text-white",
+              "inline-flex items-center gap-2 text-[15px] font-medium tracking-tight transition-colors",
+              solid ? "text-foreground/75 hover:text-foreground" : "text-white/85 hover:text-white",
             )}
           >
             <Phone className="h-4 w-4" />
             {company.phone}
           </a>
-          <Link
-            to="/selg"
-            className="inline-flex items-center rounded-md bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground transition-transform hover:-translate-y-0.5 hover:shadow-md"
-          >
+          <Link to="/selg" className="btn btn-brand">
             Få tilbud på bilen
           </Link>
         </div>
 
         <button
           className={cn(
-            "md:hidden p-2 rounded-md transition-colors",
+            "md:hidden -mr-2 p-2 rounded-full transition-colors",
             solid ? "text-foreground" : "text-white",
           )}
           onClick={() => setOpen((o) => !o)}
           aria-label="Meny"
+          aria-expanded={open}
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {open && (
-        <div className="md:hidden bg-background border-t border-hairline">
-          <div className="container-page py-6 flex flex-col gap-1">
+        <div className="md:hidden bg-background border-t border-hairline animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="container-page py-8 flex flex-col">
             {nav.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
                 onClick={() => setOpen(false)}
-                className="py-3 text-lg font-medium text-foreground hairline-b"
+                className="py-4 text-xl font-medium tracking-tight text-foreground hairline-b"
               >
                 {n.label}
               </Link>
             ))}
             <a
               href={company.phoneHref}
-              className="py-3 text-lg font-medium text-foreground flex items-center gap-2 hairline-b"
+              className="py-4 text-xl font-medium text-foreground flex items-center gap-3 hairline-b"
             >
-              <Phone className="h-5 w-5" /> {company.phone}
+              <Phone className="h-5 w-5 text-brand" /> {company.phone}
             </a>
             <Link
               to="/selg"
               onClick={() => setOpen(false)}
-              className="mt-4 inline-flex justify-center rounded-md bg-brand px-4 py-3 font-semibold text-brand-foreground"
+              className="btn btn-brand btn-lg mt-8 w-full"
             >
               Få tilbud på bilen
             </Link>

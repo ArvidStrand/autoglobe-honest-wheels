@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Variant = "hero" | "panel";
@@ -14,19 +14,23 @@ export function LeadForm({ variant = "hero" }: { variant?: Variant }) {
   };
 
   const wrapClass = cn(
-    "rounded-2xl p-6 sm:p-8 md:p-10",
+    "rounded-[28px]",
     variant === "hero"
-      ? "bg-background shadow-lift border border-hairline"
-      : "bg-secondary/60 border border-hairline",
+      ? "bg-background border border-hairline shadow-float p-7 sm:p-10 md:p-12"
+      : "bg-secondary/60 border border-hairline p-6 sm:p-8",
   );
 
   if (submitted) {
     return (
       <div className={wrapClass}>
-        <div className="flex flex-col items-center text-center py-6">
-          <CheckCircle2 className="h-12 w-12 text-brand" />
-          <h3 className="mt-4 text-2xl font-semibold">Takk, {form.name || "vi kontakter deg"}!</h3>
-          <p className="mt-3 text-muted-foreground max-w-md">
+        <div className="flex flex-col items-center text-center py-8">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand/10">
+            <CheckCircle2 className="h-8 w-8 text-brand" />
+          </div>
+          <h3 className="mt-6 text-3xl font-semibold tracking-tight">
+            Takk, {form.name || "vi kontakter deg"}!
+          </h3>
+          <p className="mt-4 text-muted-foreground leading-relaxed max-w-sm">
             Vi har mottatt henvendelsen din på {form.reg?.toUpperCase() || "bilen din"} og
             kontakter deg på {form.phone || "telefon"} innen kort tid med et uforpliktende tilbud.
           </p>
@@ -37,7 +41,19 @@ export function LeadForm({ variant = "hero" }: { variant?: Variant }) {
 
   return (
     <form onSubmit={onSubmit} className={wrapClass}>
-      <div className="grid gap-4 sm:grid-cols-2">
+      {variant === "hero" && (
+        <div className="mb-8">
+          <p className="eyebrow">Gratis verdivurdering</p>
+          <h2 className="mt-3 text-[26px] sm:text-3xl font-semibold tracking-tight">
+            Få tilbud på bilen din
+          </h2>
+          <p className="mt-2.5 text-[15px] text-muted-foreground leading-relaxed">
+            Fyll ut skjemaet — det tar under ett minutt.
+          </p>
+        </div>
+      )}
+
+      <div className={cn("grid sm:grid-cols-2", variant === "hero" ? "gap-6" : "gap-4")}>
         <Field
           label="Registreringsnummer"
           placeholder="AB 12345"
@@ -73,13 +89,15 @@ export function LeadForm({ variant = "hero" }: { variant?: Variant }) {
 
       <button
         type="submit"
-        className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-md bg-primary px-5 py-4 text-base font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 hover:shadow-md"
+        className={cn("btn btn-brand w-full", variant === "hero" ? "btn-lg mt-8" : "mt-6")}
       >
         Få tilbud
         <ArrowRight className="h-4 w-4" />
       </button>
-      <p className="mt-3 text-xs text-muted-foreground text-center">
-        Uforpliktende og gratis. Vi kontakter deg innen 24 timer på hverdager.
+
+      <p className="mt-5 flex items-center justify-center gap-2 text-[13px] text-muted-foreground text-center">
+        <ShieldCheck className="h-4 w-4 text-brand shrink-0" />
+        Uforpliktende og gratis. Svar innen 24 timer på hverdager.
       </p>
     </form>
   );
@@ -106,9 +124,7 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="block text-xs font-medium uppercase tracking-wider text-muted-foreground mb-1.5">
-        {label}
-      </span>
+      <span className="field-label">{label}</span>
       <input
         type={type}
         required={required}
@@ -116,10 +132,7 @@ function Field({
         value={value}
         inputMode={inputMode}
         onChange={(e) => onChange(e.target.value)}
-        className={cn(
-          "w-full rounded-md border border-input bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition",
-          uppercase && "tracking-widest font-medium",
-        )}
+        className={cn("field-input", uppercase && "tracking-[0.12em] font-medium")}
       />
     </label>
   );

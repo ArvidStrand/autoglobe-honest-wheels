@@ -4,6 +4,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { CarCard } from "@/components/site/CarCard";
 import { LeadForm } from "@/components/site/LeadForm";
+import { Reveal } from "@/components/site/Reveal";
 import { cars, formatKm, formatPrice, getCar } from "@/lib/cars";
 import { company } from "@/lib/company";
 
@@ -30,10 +31,10 @@ export const Route = createFileRoute("/biler/$id")({
   notFoundComponent: () => (
     <>
       <Navbar />
-      <main className="pt-32 pb-20 container-page text-center">
-        <h1 className="text-3xl font-semibold">Bilen finnes ikke</h1>
-        <p className="mt-3 text-muted-foreground">Denne bilen er sannsynligvis solgt.</p>
-        <Link to="/biler" className="mt-6 inline-block text-brand font-medium">Se andre biler →</Link>
+      <main className="section-top pb-24 container-page text-center">
+        <h1 className="text-4xl font-semibold tracking-tight">Bilen finnes ikke</h1>
+        <p className="mt-4 text-muted-foreground">Denne bilen er sannsynligvis solgt.</p>
+        <Link to="/biler" className="btn btn-dark mt-8">Se andre biler</Link>
       </main>
       <Footer />
     </>
@@ -41,10 +42,10 @@ export const Route = createFileRoute("/biler/$id")({
   errorComponent: ({ error, reset }) => (
     <>
       <Navbar />
-      <main className="pt-32 pb-20 container-page text-center">
-        <h1 className="text-3xl font-semibold">Noe gikk galt</h1>
-        <p className="mt-3 text-muted-foreground">{error.message}</p>
-        <button onClick={reset} className="mt-6 text-brand font-medium">Prøv igjen</button>
+      <main className="section-top pb-24 container-page text-center">
+        <h1 className="text-4xl font-semibold tracking-tight">Noe gikk galt</h1>
+        <p className="mt-4 text-muted-foreground">{error.message}</p>
+        <button onClick={reset} className="btn btn-dark mt-8">Prøv igjen</button>
       </main>
       <Footer />
     </>
@@ -59,24 +60,30 @@ function CarDetail() {
   return (
     <>
       <Navbar />
-      <main className="pt-24 md:pt-32 pb-20 md:pb-28">
+      <main className="section-top pb-24 md:pb-36">
         <div className="container-page">
-          <Link to="/biler" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+          <Link to="/biler" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
             <ArrowLeft className="h-4 w-4" /> Tilbake til alle biler
           </Link>
 
-          <div className="mt-6 grid gap-10 lg:grid-cols-12">
+          <div className="mt-10 grid gap-12 lg:gap-16 lg:grid-cols-12">
             <div className="lg:col-span-8">
-              <div className="rounded-2xl overflow-hidden bg-muted border border-hairline">
-                <img src={car.image} alt={car.title} className="w-full aspect-[4/3] object-cover" />
-              </div>
+              <Reveal>
+                <div className="rounded-[28px] overflow-hidden bg-muted border border-hairline shadow-float">
+                  <img src={car.image} alt={car.title} className="w-full aspect-[16/11] object-cover" />
+                </div>
+              </Reveal>
 
-              <div className="mt-10">
-                <p className="text-xs uppercase tracking-widest text-brand font-medium">{car.brand}</p>
-                <h1 className="mt-2 text-3xl md:text-5xl font-semibold tracking-tight">{car.title}</h1>
-                <p className="mt-4 text-2xl md:text-3xl font-semibold text-foreground">{formatPrice(car.priceNok)}</p>
+              <div className="mt-14">
+                <p className="eyebrow">{car.brand}</p>
+                <h1 className="mt-4 text-[38px] sm:text-5xl md:text-[60px] font-semibold tracking-[-0.035em] leading-[1.03]">
+                  {car.title}
+                </h1>
+                <p className="mt-6 text-3xl md:text-4xl font-semibold tracking-tight text-foreground">
+                  {formatPrice(car.priceNok)}
+                </p>
 
-                <dl className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-6 border-y border-hairline py-8">
+                <dl className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-6 border-y border-hairline py-10">
                   {[
                     { l: "Årsmodell", v: car.year },
                     { l: "Km stand", v: formatKm(car.mileageKm) },
@@ -84,34 +91,34 @@ function CarDetail() {
                     { l: "Girkasse", v: car.transmission },
                   ].map((f: { l: string; v: string | number }) => (
                     <div key={f.l}>
-                      <dt className="text-xs uppercase tracking-widest text-muted-foreground">{f.l}</dt>
-                      <dd className="mt-1 text-lg font-medium text-foreground">{f.v}</dd>
+                      <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">{f.l}</dt>
+                      <dd className="mt-2 text-xl font-medium text-foreground">{f.v}</dd>
                     </div>
                   ))}
                 </dl>
 
-                <section className="mt-12">
-                  <h2 className="text-2xl font-semibold">Beskrivelse</h2>
-                  <p className="mt-4 text-muted-foreground leading-relaxed text-lg">{car.description}</p>
+                <section className="mt-16">
+                  <h2 className="text-3xl font-semibold tracking-tight">Beskrivelse</h2>
+                  <p className="mt-6 text-lg text-muted-foreground leading-[1.8] max-w-[62ch]">{car.description}</p>
                 </section>
 
-                <section className="mt-12">
-                  <h2 className="text-2xl font-semibold">Utstyr</h2>
-                  <ul className="mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-3">
+                <section className="mt-16">
+                  <h2 className="text-3xl font-semibold tracking-tight">Utstyr</h2>
+                  <ul className="mt-8 grid sm:grid-cols-2 gap-x-8 gap-y-4">
                     {car.equipment.map((e) => (
-                      <li key={e} className="flex items-start gap-3 text-foreground">
-                        <Check className="h-5 w-5 text-brand shrink-0 mt-0.5" />
+                      <li key={e} className="flex items-start gap-3 text-[17px] text-foreground">
+                        <Check className="h-5 w-5 text-brand shrink-0 mt-1" />
                         <span>{e}</span>
                       </li>
                     ))}
                   </ul>
                 </section>
 
-                <section className="mt-12">
-                  <h2 className="text-2xl font-semibold">Spesifikasjoner</h2>
-                  <dl className="mt-6 divide-y divide-hairline border-y border-hairline">
+                <section className="mt-16">
+                  <h2 className="text-3xl font-semibold tracking-tight">Spesifikasjoner</h2>
+                  <dl className="mt-8 divide-y divide-hairline border-y border-hairline">
                     {car.specs.map((s: { label: string; value: string }) => (
-                      <div key={s.label} className="flex justify-between py-3 text-sm">
+                      <div key={s.label} className="flex justify-between gap-6 py-4 text-[15px]">
                         <dt className="text-muted-foreground">{s.label}</dt>
                         <dd className="font-medium text-foreground text-right">{s.value}</dd>
                       </div>
@@ -122,30 +129,37 @@ function CarDetail() {
             </div>
 
             <aside className="lg:col-span-4">
-              <div className="lg:sticky lg:top-28 space-y-6">
-                <div className="rounded-2xl border border-hairline bg-background shadow-card p-6">
-                  <p className="text-xs uppercase tracking-widest text-muted-foreground">Pris</p>
-                  <p className="mt-1 text-3xl font-semibold">{formatPrice(car.priceNok)}</p>
-                  <p className="mt-1 text-sm text-muted-foreground">Finansiering fra ca. {formatPrice(Math.round(car.priceNok / 60))} pr. mnd*</p>
+              <div className="lg:sticky lg:top-32 space-y-8">
+                <div className="surface-card p-8">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Pris</p>
+                  <p className="mt-2 text-4xl font-semibold tracking-[-0.03em]">{formatPrice(car.priceNok)}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    Finansiering fra ca. {formatPrice(Math.round(car.priceNok / 60))} pr. mnd*
+                  </p>
 
-                  <div className="mt-6 space-y-3">
-                    <a href={company.phoneHref} className="w-full inline-flex items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 font-semibold text-primary-foreground hover:-translate-y-0.5 transition-transform">
+                  <div className="mt-8 space-y-3">
+                    <a href={company.phoneHref} className="btn btn-dark w-full">
                       <Phone className="h-4 w-4" /> Ring {company.phone}
                     </a>
-                    <a href={`mailto:${company.email}?subject=Interessert i ${car.title}`} className="w-full inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-5 py-3 font-semibold text-foreground hover:bg-accent">
+                    <a
+                      href={`mailto:${company.email}?subject=Interessert i ${car.title}`}
+                      className="btn btn-outline-quiet w-full"
+                    >
                       <Mail className="h-4 w-4" /> Send e-post
                     </a>
                   </div>
 
-                  <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-brand" /> Finansiering tilgjengelig</li>
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-brand" /> Innbytte mulig</li>
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-brand" /> Bruktbilgaranti</li>
+                  <ul className="mt-8 space-y-3 border-t border-hairline pt-7 text-[15px] text-muted-foreground">
+                    <li className="flex items-center gap-2.5"><Check className="h-4 w-4 text-brand" /> Finansiering tilgjengelig</li>
+                    <li className="flex items-center gap-2.5"><Check className="h-4 w-4 text-brand" /> Innbytte mulig</li>
+                    <li className="flex items-center gap-2.5"><Check className="h-4 w-4 text-brand" /> Bruktbilgaranti</li>
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-semibold mb-3">Vil du bytte inn din bil?</h3>
+                  <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground mb-4">
+                    Vil du bytte inn din bil?
+                  </h2>
                   <LeadForm variant="panel" />
                 </div>
               </div>
@@ -153,10 +167,16 @@ function CarDetail() {
           </div>
 
           {related.length > 0 && (
-            <section className="mt-24">
-              <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Andre biler du kanskje liker</h2>
-              <div className="mt-8 grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                {related.map((c) => <CarCard key={c.id} car={c} />)}
+            <section className="mt-28 md:mt-40">
+              <h2 className="text-3xl md:text-[44px] font-semibold tracking-[-0.03em]">
+                Andre biler du kanskje liker
+              </h2>
+              <div className="mt-12 grid gap-8 md:gap-10 sm:grid-cols-2 lg:grid-cols-3">
+                {related.map((c, i) => (
+                  <Reveal key={c.id} delay={i * 90} className="h-full">
+                    <CarCard car={c} />
+                  </Reveal>
+                ))}
               </div>
             </section>
           )}

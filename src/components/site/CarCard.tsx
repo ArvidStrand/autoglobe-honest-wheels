@@ -8,42 +8,49 @@ export function CarCard({ car }: { car: Car }) {
     <Link
       to="/biler/$id"
       params={{ id: car.id }}
-      className="group block rounded-2xl overflow-hidden bg-card border border-hairline shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
+      className="group flex flex-col overflow-hidden surface-card transition-[transform,box-shadow] duration-[250ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-float"
     >
-      <div className="aspect-[4/3] overflow-hidden bg-muted">
+      <div className="relative aspect-[16/11] overflow-hidden bg-muted">
         <img
           src={car.image}
-          alt={car.title}
+          alt={`${car.title} til salgs hos Auto Globe AS`}
           loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
         />
+        <span className="absolute left-4 top-4 rounded-full bg-background/90 backdrop-blur-sm px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground">
+          {car.year}
+        </span>
       </div>
-      <div className="p-6">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <p className="text-xs uppercase tracking-wider text-muted-foreground">{car.brand}</p>
-            <h3 className="mt-1 text-lg font-semibold text-foreground truncate">{car.model}</h3>
-          </div>
-          <ArrowUpRight className="h-5 w-5 text-muted-foreground shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </div>
 
-        <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
-          <li>{car.year}</li>
-          <li>·</li>
+      <div className="flex flex-1 flex-col p-7 md:p-8">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          {car.brand}
+        </p>
+        <h3 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
+          {car.model}
+        </h3>
+
+        <ul className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
           <li>{formatKm(car.mileageKm)}</li>
-          <li>·</li>
+          <li aria-hidden className="h-1 w-1 rounded-full bg-silver" />
           <li>{car.fuel}</li>
-          <li>·</li>
+          <li aria-hidden className="h-1 w-1 rounded-full bg-silver" />
           <li>{car.transmission}</li>
         </ul>
 
-        <div className="mt-6 flex items-end justify-between border-t border-hairline pt-5">
-          <p className="text-2xl font-semibold tracking-tight text-foreground">
-            {formatPrice(car.priceNok)}
-          </p>
-          <span className="text-sm font-medium text-brand group-hover:underline underline-offset-4">
-            Se bilen
-          </span>
+        <div className="mt-auto pt-8">
+          <div className="flex items-end justify-between gap-4 border-t border-hairline pt-6">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Pris</p>
+              <p className="mt-1 text-[26px] leading-none font-semibold tracking-tight text-foreground">
+                {formatPrice(car.priceNok)}
+              </p>
+            </div>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-hairline px-4 py-2.5 text-sm font-semibold text-foreground transition-colors duration-[250ms] group-hover:border-foreground group-hover:bg-foreground group-hover:text-background">
+              Se bilen
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-[250ms] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </span>
+          </div>
         </div>
       </div>
     </Link>
