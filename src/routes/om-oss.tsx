@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
-import { company } from "@/lib/company";
+
 import gl350 from "@/assets/gl350.asset.json";
 
 export const Route = createFileRoute("/om-oss")({
