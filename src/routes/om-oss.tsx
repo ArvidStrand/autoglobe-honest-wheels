@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
-import { company } from "@/lib/company";
+
 import gl350 from "@/assets/gl350.asset.json";
 
 export const Route = createFileRoute("/om-oss")({
@@ -23,49 +23,70 @@ function AboutPage() {
       <Navbar />
       <main className="section-top pb-24 md:pb-36">
         <div className="container-page">
-          <Reveal className="max-w-4xl">
-            <p className="eyebrow">Om Auto Globe AS</p>
+          <Reveal className="max-w-[62ch]">
+            <p className="eyebrow">Auto Globe AS</p>
             <h1 className="mt-5 text-[40px] sm:text-6xl md:text-[68px] font-semibold tracking-[-0.035em] leading-[1.04]">
-              Lokal bruktbilforhandler med et enkelt løfte: ærlighet.
+              Om oss
             </h1>
-            <p className="mt-8 text-lg md:text-xl text-muted-foreground leading-[1.8] max-w-[58ch]">
-              Auto Globe AS drives fra Sulfatveien 29 i Torp. Vi har mange års erfaring
-              fra bilbransjen, og har spesialisert oss på rimelige bruktbiler av god kvalitet.
+            <p className="mt-8 text-xl md:text-2xl text-muted-foreground leading-[1.6] tracking-[-0.01em]">
+              Din lokale bruktbilforhandler med fokus på kvalitet, trygghet og personlig service
             </p>
           </Reveal>
 
-          <div className="mt-20 md:mt-28 grid gap-14 lg:gap-20 lg:grid-cols-2 lg:items-center">
-            <Reveal>
-              <div className="aspect-[4/3] overflow-hidden rounded-[28px] border border-hairline shadow-float">
-                <img
-                  src={gl350.url}
-                  alt="Auto Globe AS – bruktbil"
-                  className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
-                  loading="lazy"
-                />
-              </div>
-            </Reveal>
-            <Reveal delay={120} className="space-y-7 text-lg text-muted-foreground leading-[1.8] max-w-[54ch]">
-              <p>
-                Vi tror på personlig og direkte kundekontakt. Når du kommer innom oss,
-                møter du eier <span className="text-foreground font-medium">{company.owner}</span> — ikke en avdeling.
-              </p>
-              <p>
-                Alle bilene vi selger er nøye kontrollert. Vi tilbyr finansiering,
-                innbytte og bruktbilgaranti, og kjøper også biler direkte fra privatpersoner.
-              </p>
-              <p>
-                Målet vårt er enkelt: du skal føle deg trygg fra første telefonsamtale
-                til nøkkelen ligger i hånden din.
-              </p>
-            </Reveal>
-          </div>
+          <Reveal delay={100} className="mt-16 md:mt-20">
+            <div className="aspect-[16/9] overflow-hidden rounded-[28px] border border-hairline shadow-float">
+              <img
+                src={gl350.url}
+                alt="Auto Globe AS – bruktbil"
+                className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
+                loading="lazy"
+              />
+            </div>
+          </Reveal>
 
-          <div className="mt-24 md:mt-32 grid gap-12 md:gap-10 sm:grid-cols-3 border-t border-hairline pt-16">
-            <Value index="01" title="Ærlighet" body="Vi selger bilene slik de er. Ingen skjulte overraskelser." />
-            <Value index="02" title="Kvalitet" body="Nøye utvalgte biler som er kontrollert før levering." />
-            <Value index="03" title="Personlig service" body="Direkte kontakt med eier — hele veien." />
-          </div>
+          <Reveal delay={140}>
+            <div className="mt-16 md:mt-24 max-w-[62ch] space-y-8 md:space-y-10 text-lg md:text-[19px] text-muted-foreground leading-[1.85]">
+              <p className="text-foreground text-xl md:text-2xl leading-[1.7] tracking-[-0.01em] border-l-2 border-brand pl-6 md:pl-8">
+                Auto Globe AS er en bruktbilforhandler som spesialiserer seg på kjøp og salg av
+                bruktbiler til konkurransedyktige priser. Vi legger stor vekt på ærlighet, trygghet
+                og personlig service, slik at du kan føle deg sikker gjennom hele bilhandelen. Hos
+                oss finner du nøye utvalgte bruktbiler i ulike prisklasser, og vi hjelper deg med
+                innbytte, finansiering og forsikring ved behov. Vårt mål er å gjøre bilkjøp og
+                bilsalg enkelt, trygt og problemfritt.
+              </p>
+              <p>
+                Hos Auto Globe AS ønsker vi å gjøre bilhandel enkel, trygg og forutsigbar. Fra våre
+                lokaler i Sulfatveien 29 på Torp tilbyr vi nøye utvalgte bruktbiler med fokus på
+                kvalitet, ærlighet og en kundeopplevelse du kan føle deg trygg på.
+              </p>
+              <p>
+                Vi har flere års erfaring fra bilbransjen og vet hvor viktig det er med åpenhet, god
+                service og en ryddig handel. Bil er mer enn bare et transportmiddel – det er en
+                investering, og derfor ønsker vi at du skal føle deg trygg gjennom hele prosessen.
+              </p>
+              <p>
+                Som en lokal og uavhengig bruktbilforhandler er vi opptatt av å være tilgjengelige
+                for kundene våre. Vi tar oss tid til å svare på spørsmål, gi ærlige råd og hjelpe deg
+                med å finne bilen som passer dine behov. Vi jobber kontinuerlig med å utvikle oss og
+                forbedre kundeopplevelsen, fordi vi mener at god service er noe man fortjener – ikke
+                noe man skal be om.
+              </p>
+              <p>
+                For kunder som kommer langveisfra tilbyr vi videovisning av bilen før et eventuelt
+                besøk. Da går vi gjennom bilen sammen, viser detaljer og svarer på spørsmål, slik at
+                bilen i størst mulig grad står til forventningene når du kommer på prøvekjøring.
+              </p>
+              <p>
+                Vi tilbyr også finansiering, innbytte og bruktbilgaranti på aktuelle biler, og kjøper
+                biler direkte fra privatpersoner over hele Norge. Enten du skal kjøpe eller selge bil,
+                er målet vårt å gjøre prosessen enkel, ryddig og trygg.
+              </p>
+              <p className="text-foreground">
+                Hos Auto Globe AS handler bilkjøp om mer enn bare bilen – det handler om tillit, god
+                service og en kundeopplevelse du gjerne anbefaler videre.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </main>
       <Footer />
@@ -73,12 +94,3 @@ function AboutPage() {
   );
 }
 
-function Value({ index, title, body }: { index: string; title: string; body: string }) {
-  return (
-    <Reveal>
-      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">{index}</p>
-      <h2 className="mt-4 text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
-      <p className="mt-3 text-muted-foreground leading-[1.75] max-w-[36ch]">{body}</p>
-    </Reveal>
-  );
-}
