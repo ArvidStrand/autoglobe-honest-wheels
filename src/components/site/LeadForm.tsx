@@ -1,16 +1,31 @@
 import { useState } from "react";
-import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck, Loader2 } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
 import { cn } from "@/lib/utils";
+import { submitLead } from "@/lib/leads.functions";
 
 type Variant = "hero" | "panel";
 
 export function LeadForm({ variant = "hero" }: { variant?: Variant }) {
+  const send = useServerFn(submitLead);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({ reg: "", km: "", name: "", phone: "" });
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (loading) return;
+    setLoading(true);
+    setError(null);
+    try {
+      await send({ data: { ...form, source: "verdivurdering" } });
+      setSubmitted(true);
+    } catch {
+      setError("Noe gikk galt. Prøv igjen, eller ring oss direkte.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const wrapClass = cn(
@@ -28,11 +43,11 @@ export function LeadForm({ variant = "hero" }: { variant?: Variant }) {
             <CheckCircle2 className="h-8 w-8 text-brand" />
           </div>
           <h3 className="mt-6 text-3xl font-semibold tracking-tight">
-            Takk, {form.name || "vi kontakter deg"}!
+            Takk, {form.name || "vi tar kontakt med deg snart"}!
           </h3>
           <p className="mt-4 text-muted-foreground leading-relaxed max-w-sm">
             Vi har mottatt henvendelsen din på {form.reg?.toUpperCase() || "bilen din"} og
-            kontakter deg på {form.phone || "telefon"} innen kort tid med et uforpliktende tilbud.
+            kontakter deg på {form.phone || "telefon"} snart med et uforpliktende tilbud.
           </p>
         </div>
       </div>
@@ -87,12 +102,26 @@ export function LeadForm({ variant = "hero" }: { variant?: Variant }) {
         />
       </div>
 
+      {error && (
+        <p className="mt-5 rounded-xl border border-brand/30 bg-brand/5 px-4 py-3 text-[14px] text-brand">
+          {error}
+        </p>
+      )}
+
       <button
         type="submit"
-        className={cn("btn btn-brand w-full", variant === "hero" ? "btn-lg mt-8" : "mt-6")}
+        disabled={loading}
+        className={cn(
+          "btn btn-brand w-full disabled:opacity-70",
+          variant === "hero" ? "btn-lg mt-8" : "mt-6",
+        )}
       >
-        Få tilbud
-        <ArrowRight className="h-4 w-4" />
+        {loading ? "Sender…" : "Få tilbud"}
+        {loading ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : (
+          <ArrowRight className="h-4 w-4" />
+        )}
       </button>
 
       <p className="mt-5 flex items-center justify-center gap-2 text-[13px] text-muted-foreground text-center">
