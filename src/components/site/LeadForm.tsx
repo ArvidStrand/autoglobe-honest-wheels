@@ -1,13 +1,30 @@
 import { useState } from "react";
 import { ArrowRight, CheckCircle2, ShieldCheck, Loader2 } from "lucide-react";
-import { useServerFn } from "@tanstack/react-start";
 import { cn } from "@/lib/utils";
-import { submitLead } from "@/lib/leads.functions";
 
 type Variant = "hero" | "panel";
 
+// Fallback backend (Lovable-hosted) used if the site is served as a static
+// build without the server route (e.g. static hosting on Netlify).
+const FALLBACK_ENDPOINT = "https://autoglobe-honest-wheels.lovable.app/api/public/lead";
+
+async function postLead(payload: Record<string, string>) {
+  const body = JSON.stringify(payload);
+  const headers = { "content-type": "application/json" };
+
+  try {
+    const res = await fetch("/api/public/lead", { method: "POST", headers, body });
+    if (res.ok) return true;
+    if (res.status >= 400 && res.status < 500 && res.status !== 404) return false;
+  } catch {
+    // ignore and try the fallback
+  }
+
+  const res = await fetch(FALLBACK_ENDPOINT, { method: "POST", headers, body });
+  return res.ok;
+}
+
 export function LeadForm({ variant = "hero" }: { variant?: Variant }) {
-  const send = useServerFn(submitLead);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -16,10 +33,26 @@ export function LeadForm({ variant = "hero" }: { variant?: Variant }) {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (loading) return;
+
+    const reg = form.reg.trim();
+    const name = form.name.trim();
+    const phone = form.phone.trim();
+    if (reg.length < 2 || name.length < 2 || phone.replace(/\D/g, "").length < 6) {
+      setError("Fyll ut registreringsnummer, navn og et gyldig telefonnummer.");
+      return;
+    }
+
     setLoading(true);
     setError(null);
     try {
-      await send({ data: { ...form, source: "verdivurdering" } });
+      const ok = await postLead({
+        reg,
+        km: form.km.trim(),
+        name,
+        phone,
+        source: "verdivurdering",
+      });
+      if (!ok) throw new Error("send_failed");
       setSubmitted(true);
     } catch {
       setError("Noe gikk galt. Prøv igjen, eller ring oss direkte.");
@@ -27,6 +60,7 @@ export function LeadForm({ variant = "hero" }: { variant?: Variant }) {
       setLoading(false);
     }
   };
+
 
   const wrapClass = cn(
     "rounded-[28px]",
