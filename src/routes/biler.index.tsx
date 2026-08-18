@@ -16,10 +16,10 @@ export const Route = createFileRoute("/biler/")({
       { property: "og:title", content: "Bruktbiler til salgs i Sandefjord – Auto Globe AS" },
       { property: "og:description", content: "Oppdatert utvalg av bruktbiler hos Auto Globe AS i Torp ved Sandefjord." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://autoglobe-honest-wheels.lovable.app/biler" },
+      { property: "og:url", content: "https://autoglobe.no/biler" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://autoglobe-honest-wheels.lovable.app/biler" }],
+    links: [{ rel: "canonical", href: "https://autoglobe.no/biler" }],
   }),
   component: CarsPage,
 });

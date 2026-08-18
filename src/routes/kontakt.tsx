@@ -14,11 +14,11 @@ export const Route = createFileRoute("/kontakt")({
       { name: "description", content: "Kontakt Auto Globe AS i Sulfatveien 29, 1658 Torp ved Sandefjord. Ring 984 06 472, send e-post til post@autoglobe.no eller kom innom." },
       { property: "og:title", content: "Kontakt Auto Globe AS – bilforhandler i Torp, Sandefjord" },
       { property: "og:description", content: "Ring 984 06 472, send e-post eller besøk oss i Sulfatveien 29, Torp." },
-      { property: "og:url", content: "https://autoglobe-honest-wheels.lovable.app/kontakt" },
+      { property: "og:url", content: "https://autoglobe.no/kontakt" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://autoglobe-honest-wheels.lovable.app/kontakt" }],
+    links: [{ rel: "canonical", href: "https://autoglobe.no/kontakt" }],
   }),
   component: ContactPage,
 });

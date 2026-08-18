@@ -12,11 +12,11 @@ export const Route = createFileRoute("/selg")({
       { name: "description", content: "Få et uforpliktende tilbud på bilen din. Auto Globe AS i Torp ved Sandefjord kjøper biler direkte fra privatpersoner, og tilbyr innbytte." },
       { property: "og:title", content: "Selg bilen din i Sandefjord – Auto Globe AS" },
       { property: "og:description", content: "Rask og enkel prosess. Få et uforpliktende tilbud på bilen din." },
-      { property: "og:url", content: "https://autoglobe-honest-wheels.lovable.app/selg" },
+      { property: "og:url", content: "https://autoglobe.no/selg" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://autoglobe-honest-wheels.lovable.app/selg" }],
+    links: [{ rel: "canonical", href: "https://autoglobe.no/selg" }],
   }),
   component: SellPage,
 });
