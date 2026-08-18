@@ -3,6 +3,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { FinnCarDetail } from "@/components/site/FinnCarDetail";
 import { fetchFinnListing, formatFinnKm, formatFinnPrice, type FinnListing } from "@/lib/finn";
+import { getFinnAdFn } from "@/lib/finn.functions";
 
 const SITE = "https://autoglobe-honest-wheels.lovable.app";
 
@@ -11,9 +12,13 @@ export const Route = createFileRoute("/biler/$id")({
     if (!/^\d{1,15}$/.test(params.id)) throw notFound();
     let listing: FinnListing | null = null;
     try {
-      listing = await fetchFinnListing(params.id);
+      listing = (await getFinnAdFn({ data: { id: params.id } })) as FinnListing | null;
     } catch {
-      listing = null;
+      try {
+        listing = await fetchFinnListing(params.id);
+      } catch {
+        listing = null;
+      }
     }
     return { finnId: params.id, listing };
   },
