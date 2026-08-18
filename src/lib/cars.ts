@@ -1,6 +1,6 @@
-import gl350 from "@/assets/gl350.asset.json";
-import e200 from "@/assets/e200.asset.json";
-import mazda6 from "@/assets/mazda6.asset.json";
+import gl350 from "@/assets/gl350.jpg";
+import e200 from "@/assets/e200.jpg";
+import mazda6 from "@/assets/mazda6.jpg";
 
 export type Car = {
   id: string;
@@ -37,7 +37,7 @@ export const cars: Car[] = [
     color: "Cavansittblå metallic",
     bodyType: "SUV, 7-seter",
     priceNok: 289000,
-    image: gl350.url,
+    image: gl350,
     description:
       "En kompromissløs familie-SUV med plass til syv, kraftig V6 diesel og AMG-Line utstyrspakke. Bilen har full servicehistorikk, panoramatak, skinninteriør og luftfjæring. Perfekt for lange turer og familier med behov for komfort og trekkraft.",
     equipment: [
@@ -77,7 +77,7 @@ export const cars: Car[] = [
     color: "Palladiumsølv metallic",
     bodyType: "Coupé",
     priceNok: 149000,
-    image: e200.url,
+    image: e200,
     description:
       "Elegant E-Klasse Coupé med AMG utseendepakke, panoramatak og et lekkert interiør. Bilen er velholdt, har full servicehistorikk hos merkeforhandler og fremstår som helt strøken. En stilren og komfortabel bil med lave driftskostnader.",
     equipment: [
@@ -117,7 +117,7 @@ export const cars: Car[] = [
     color: "Snowflake White Pearl",
     bodyType: "Stasjonsvogn",
     priceNok: 179000,
-    image: mazda6.url,
+    image: mazda6,
     description:
       "Toppmodellen Optimum med skinninteriør, head-up display, Bose lydanlegg og full teknologipakke. En romslig og drivstoffgjerrig familiebil med lav egenvekt og sportslige kjøreegenskaper.",
     equipment: [

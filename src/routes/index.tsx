@@ -7,8 +7,8 @@ import { CarCard } from "@/components/site/CarCard";
 import { Reveal } from "@/components/site/Reveal";
 import { cars } from "@/lib/cars";
 import { company } from "@/lib/company";
-import gl350 from "@/assets/gl350.asset.json";
-import e200 from "@/assets/e200.asset.json";
+import gl350 from "@/assets/gl350.jpg";
+import e200 from "@/assets/e200.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -50,7 +50,7 @@ function Hero() {
     <section className="relative isolate min-h-[100svh] lg:min-h-[1000px] flex items-center pt-32 pb-20 md:pt-44 md:pb-28">
       <div className="absolute inset-0 -z-10">
         <img
-          src={gl350.url}
+          src={gl350}
           alt=""
           className="h-full w-full object-cover"
           fetchPriority="high"
@@ -245,14 +245,14 @@ function About() {
           <div className="relative">
             <div className="aspect-[4/5] overflow-hidden rounded-[28px] border border-hairline shadow-float">
               <img
-                src={gl350.url}
+                src={gl350}
                 alt="Bruktbil fra Auto Globe AS"
                 className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
                 loading="lazy"
               />
             </div>
             <div className="hidden lg:block absolute -bottom-10 -left-10 w-52 overflow-hidden rounded-3xl border border-hairline shadow-float bg-background">
-              <img src={e200.url} alt="" className="aspect-[4/3] w-full object-cover" loading="lazy" />
+              <img src={e200} alt="" className="aspect-[4/3] w-full object-cover" loading="lazy" />
             </div>
           </div>
         </Reveal>
