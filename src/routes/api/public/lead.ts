@@ -13,7 +13,6 @@ const leadSchema = z.object({
 
 const RECIPIENT = "post@autoglobe.no";
 const FROM = "Auto Globe AS <nettside@autoglobe.no>";
-const FROM_FALLBACK = "Auto Globe AS <onboarding@resend.dev>";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -24,7 +23,7 @@ const corsHeaders = {
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { "content-type": "application/json", ...corsHeaders },
+    headers: { "content-type": "application/json", "cache-control": "no-store", ...corsHeaders },
   });
 }
 
@@ -116,23 +115,15 @@ export const Route = createFileRoute("/api/public/lead")({
           ...(lead.email ? { reply_to: lead.email } : {}),
         };
 
-        let response = await sendViaResend(apiKey, FROM, payload);
+        const response = await sendViaResend(apiKey, FROM, payload);
         if (!response.ok) {
           const body = await response.text();
           console.error(`Resend feilet [${response.status}]: ${body}`);
-          // Domain not verified yet — retry with Resend's shared sender.
-          if (response.status === 403 || response.status === 422) {
-            response = await sendViaResend(apiKey, FROM_FALLBACK, payload);
-            if (!response.ok) {
-              console.error(`Resend fallback feilet [${response.status}]: ${await response.text()}`);
-              return json({ ok: false, error: "email_failed" }, 502);
-            }
-          } else {
-            return json({ ok: false, error: "email_failed" }, 502);
-          }
+          return json({ ok: false, error: "email_failed" }, 502);
         }
 
-        return json({ ok: true });
+        const result = (await response.json()) as { id?: string };
+        return json({ ok: true, emailId: result.id ?? null });
       },
     },
   },
