@@ -20,6 +20,19 @@ export const Route = createFileRoute("/biler/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://autoglobe.no/biler" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Hjem", item: "https://autoglobe.no/" },
+            { "@type": "ListItem", position: 2, name: "Våre biler", item: "https://autoglobe.no/biler" },
+          ],
+        }),
+      },
+    ],
   }),
   component: CarsPage,
 });
