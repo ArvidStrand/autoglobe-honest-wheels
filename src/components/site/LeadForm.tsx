@@ -15,13 +15,16 @@ async function postLead(payload: Record<string, string>) {
   try {
     const res = await fetch("/api/public/lead", { method: "POST", headers, body });
     if (res.ok) return true;
-    if (res.status >= 400 && res.status < 500 && res.status !== 404) return false;
   } catch {
     // ignore and try the fallback
   }
 
-  const res = await fetch(FALLBACK_ENDPOINT, { method: "POST", headers, body });
-  return res.ok;
+  try {
+    const res = await fetch(FALLBACK_ENDPOINT, { method: "POST", headers, body });
+    return res.ok;
+  } catch {
+    return false;
+  }
 }
 
 export function LeadForm({ variant = "hero" }: { variant?: Variant }) {
