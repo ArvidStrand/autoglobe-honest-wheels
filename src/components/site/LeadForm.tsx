@@ -7,7 +7,7 @@ type Variant = "hero" | "panel";
 // Fallback backend (Lovable-hosted) used if the site is served as a static
 // build without the server route (e.g. static hosting on Netlify).
 const FALLBACK_ENDPOINT =
-  "https://project--ead1ad3e-4823-4aca-9f7a-0f1753e04234-dev.lovable.app/api/public/lead";
+  "https://project--ead1ad3e-4823-4aca-9f7a-0f1753e04234.lovable.app/api/public/lead";
 
 async function postLead(payload: Record<string, string>) {
   const body = JSON.stringify(payload);
