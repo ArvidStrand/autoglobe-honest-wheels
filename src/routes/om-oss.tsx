@@ -189,11 +189,15 @@ function Handshake() {
 
         <Reveal className="lg:col-span-7 lg:order-1">
           <div className="overflow-hidden rounded-[28px] border border-hairline shadow-float bg-muted">
-            <img
-              src={handhilse.url}
-              alt="Selger fra Auto Globe AS håndhilser på en fornøyd kunde"
+            <video
+              src={handhilse}
+              aria-label="Selger fra Auto Globe AS håndhilser på en fornøyd kunde"
               className="h-full w-full object-cover"
-              loading="lazy"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="none"
             />
           </div>
         </Reveal>
