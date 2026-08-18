@@ -11,12 +11,28 @@ import { company } from "@/lib/company";
 export const Route = createFileRoute("/biler/$id")({
   loader: ({ params }) => {
     const car = getCar(params.id);
-    if (!car) throw notFound();
-    return { car };
+    if (!car) {
+      // FINN-annonser har numerisk ID og hentes via vårt backend-endepunkt.
+      if (/^\d{1,15}$/.test(params.id)) return { car: null, finnId: params.id };
+      throw notFound();
+    }
+    return { car, finnId: null };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
     const { car } = loaderData;
+    if (!car) {
+      return {
+        meta: [
+          { title: "Bil til salgs – Auto Globe AS" },
+          { name: "description", content: "Se detaljer, utstyr og bilder for denne bilen hos Auto Globe AS i Torp." },
+          { property: "og:title", content: "Bil til salgs – Auto Globe AS" },
+          { property: "og:description", content: "Se detaljer, utstyr og bilder for denne bilen hos Auto Globe AS i Torp." },
+          { property: "og:type", content: "product" },
+          { name: "twitter:card", content: "summary_large_image" },
+        ],
+      };
+    }
     return {
       meta: [
         { title: `${car.title} – ${formatPrice(car.priceNok)} – Auto Globe AS` },
@@ -28,6 +44,7 @@ export const Route = createFileRoute("/biler/$id")({
       ],
     };
   },
+
   notFoundComponent: () => (
     <>
       <Navbar />
