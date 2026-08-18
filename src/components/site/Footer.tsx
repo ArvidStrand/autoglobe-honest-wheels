@@ -28,7 +28,7 @@ export function Footer() {
           <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand mb-6">Kontakt</h2>
           <ul className="space-y-3.5 text-[15px] text-background/80">
             <li>{company.address.street}</li>
-            <li>{company.address.zip} {company.address.city}</li>
+            <li>{company.address.zip} {company.address.city}, {company.address.municipality}</li>
             <li><a href={company.phoneHref} className="transition-colors hover:text-brand">{company.phone}</a></li>
             <li><a href={`mailto:${company.email}`} className="transition-colors hover:text-brand">{company.email}</a></li>
           </ul>

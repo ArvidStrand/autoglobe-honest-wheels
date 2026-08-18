@@ -9,6 +9,7 @@ export const company = {
     street: "Sulfatveien 29",
     zip: "1658",
     city: "Torp",
+    municipality: "Fredrikstad",
     country: "Norge",
   },
   hours: [
@@ -16,5 +17,5 @@ export const company = {
     { day: "Lørdag", time: "10:00 – 15:00" },
     { day: "Søndag", time: "Stengt" },
   ],
-  mapsQuery: "Sulfatveien+29,+1658+Torp,+Norge",
+  mapsQuery: "Sulfatveien+29,+1658+Torp,+Fredrikstad,+Norge",
 };

@@ -107,7 +107,7 @@ export function FinnCarDetail({ id }: { id: string }) {
               <div className="overflow-hidden rounded-[28px] border border-hairline bg-muted shadow-float">
                 <img
                   src={images[active]}
-                  alt={`${car.title}${car.year ? ` ${car.year}` : ""} bruktbil til salgs hos Auto Globe AS i Torp ved Sandefjord`}
+                  alt={`${car.title}${car.year ? ` ${car.year}` : ""} bruktbil til salgs hos Auto Globe AS i Torp, Fredrikstad`}
                   className="aspect-[16/11] w-full object-cover"
                   fetchPriority="high"
                   decoding="async"

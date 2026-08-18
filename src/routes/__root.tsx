@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Auto Globe AS – Bruktbiler i Torp" },
+      { title: "Auto Globe AS – Bruktbiler i Torp, Fredrikstad" },
       {
         name: "description",
         content:
-          "Auto Globe AS selger kvalitetssikrede bruktbiler i Torp. Finansiering, innbytte og bruktbilgaranti. Få uforpliktende tilbud på bilen din.",
+          "Auto Globe AS selger kvalitetssikrede bruktbiler i Torp i Fredrikstad. Finansiering, innbytte og bruktbilgaranti. Få uforpliktende tilbud på bilen din.",
       },
       { name: "author", content: "Auto Globe AS" },
-      { property: "og:title", content: "Auto Globe AS – Bruktbiler i Torp" },
+      { property: "og:title", content: "Auto Globe AS – Bruktbiler i Torp, Fredrikstad" },
       {
         property: "og:description",
         content: "Kvalitetssikrede bruktbiler, finansiering og innbytte. Få uforpliktende tilbud på bilen din.",
@@ -115,10 +115,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "@type": "PostalAddress",
             streetAddress: "Sulfatveien 29",
             postalCode: "1658",
-            addressLocality: "Torp",
+            addressLocality: "Torp, Fredrikstad",
+            addressRegion: "Østfold",
             addressCountry: "NO",
           },
-          areaServed: ["Torp", "Sandefjord", "Vestfold"],
+          areaServed: ["Torp", "Fredrikstad", "Østfold"],
           openingHoursSpecification: [
             {
               "@type": "OpeningHoursSpecification",

@@ -12,7 +12,7 @@ export function Logo({
   return (
     <img
       src={variant === "light" ? logoLight : logoDark}
-      alt="Auto Globe AS – bruktbilforhandler i Torp ved Sandefjord"
+      alt="Auto Globe AS – bruktbilforhandler i Torp, Fredrikstad"
       className={className}
       width={900}
       height={351}

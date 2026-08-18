@@ -20,7 +20,7 @@ export function FinnCard({ listing }: { listing: FinnListing }) {
         {listing.image && (
           <img
             src={listing.image}
-            alt={`${listing.title} bruktbil til salgs hos Auto Globe AS i Torp, Sandefjord`}
+            alt={`${listing.title} bruktbil til salgs hos Auto Globe AS i Torp, Fredrikstad`}
             className="h-full w-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
             loading="lazy"
           />

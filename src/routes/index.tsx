@@ -15,16 +15,16 @@ import nokler from "@/assets/nokler.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Auto Globe AS – Bruktbilforhandler i Torp ved Sandefjord" },
+      { title: "Auto Globe AS – Bruktbilforhandler i Torp, Fredrikstad" },
       {
         name: "description",
         content:
-          "Auto Globe AS er bruktbilforhandler i Torp ved Sandefjord. Se bruktbiler til salgs, eller få et uforpliktende tilbud på bilen din. Finansiering og innbytte.",
+          "Auto Globe AS er bruktbilforhandler i Torp, Fredrikstad. Se bruktbiler til salgs, eller få et uforpliktende tilbud på bilen din. Finansiering og innbytte.",
       },
-      { property: "og:title", content: "Auto Globe AS – Bruktbilforhandler i Torp ved Sandefjord" },
+      { property: "og:title", content: "Auto Globe AS – Bruktbilforhandler i Torp, Fredrikstad" },
       {
         property: "og:description",
-        content: "Bruktbiler til salgs i Sandefjord-området. Finansiering, innbytte og ærlig service hos Auto Globe AS.",
+        content: "Bruktbiler til salgs i Fredrikstad-området. Finansiering, innbytte og ærlig service hos Auto Globe AS.",
       },
       { property: "og:url", content: "https://autoglobe.no/" },
     ],
@@ -272,7 +272,7 @@ function About() {
             <div className="aspect-[4/5] overflow-hidden rounded-[28px] border border-hairline shadow-float">
               <img
                 src={hyundai}
-                alt="Hvit Hyundai Tucson bruktbil fra Auto Globe AS i Torp ved Sandefjord"
+                alt="Hvit Hyundai Tucson bruktbil fra Auto Globe AS i Torp, Fredrikstad"
                 className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
                 loading="lazy"
               />
@@ -335,7 +335,7 @@ function MapContact() {
               </a>
 
               <ul className="mt-8 space-y-7">
-                <ContactItem icon={MapPin} title="Adresse" lines={[company.address.street, `${company.address.zip} ${company.address.city}`]} />
+                <ContactItem icon={MapPin} title="Adresse" lines={[company.address.street, `${company.address.zip} ${company.address.city}, ${company.address.municipality}`]} />
                 <ContactItem icon={Mail} title="E-post" lines={[company.email]} href={`mailto:${company.email}`} />
                 <ContactItem
                   icon={Clock}
