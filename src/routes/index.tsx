@@ -1,30 +1,34 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, ShieldCheck, Wallet, RefreshCw, Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { LeadForm } from "@/components/site/LeadForm";
-import { CarCard } from "@/components/site/CarCard";
+import { FinnCard, FinnPlaceholderCard } from "@/components/site/FinnCard";
 import { Reveal } from "@/components/site/Reveal";
-import { cars } from "@/lib/cars";
+import { fetchFinnListings } from "@/lib/finn";
 import { company } from "@/lib/company";
 import gl350 from "@/assets/gl350.jpg";
-import e200 from "@/assets/e200.jpg";
+import hyundai from "@/assets/hyundai-tucson.jpg";
+import nokler from "@/assets/nokler.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Auto Globe AS – Bruktbiler, innbytte og finansiering i Torp" },
+      { title: "Auto Globe AS – Bruktbilforhandler i Torp ved Sandefjord" },
       {
         name: "description",
         content:
-          "Se våre bruktbiler eller få et uforpliktende tilbud på bilen din. Auto Globe AS i Torp tilbyr finansiering, innbytte og bruktbilgaranti.",
+          "Auto Globe AS er bruktbilforhandler i Torp ved Sandefjord. Se bruktbiler til salgs, eller få et uforpliktende tilbud på bilen din. Finansiering og innbytte.",
       },
-      { property: "og:title", content: "Auto Globe AS – Bruktbiler i Torp" },
+      { property: "og:title", content: "Auto Globe AS – Bruktbilforhandler i Torp ved Sandefjord" },
       {
         property: "og:description",
-        content: "Kvalitetssikrede bruktbiler, innbytte og finansiering. Få tilbud på bilen din.",
+        content: "Bruktbiler til salgs i Sandefjord-området. Finansiering, innbytte og ærlig service hos Auto Globe AS.",
       },
+      { property: "og:url", content: "https://autoglobe-honest-wheels.lovable.app/" },
     ],
+    links: [{ rel: "canonical", href: "https://autoglobe-honest-wheels.lovable.app/" }],
   }),
   component: HomePage,
 });
@@ -122,6 +126,14 @@ function SectionHead({
 }
 
 function Inventory() {
+  const { data, isPending, isError } = useQuery({
+    queryKey: ["finn-listings"],
+    queryFn: fetchFinnListings,
+    staleTime: 5 * 60 * 1000,
+    retry: 1,
+  });
+  const listings = data ?? [];
+
   return (
     <section id="biler" className="section-y">
       <div className="container-page">
@@ -139,12 +151,26 @@ function Inventory() {
           </Link>
         </Reveal>
 
+        {isError && (
+          <p className="rounded-[24px] border border-hairline bg-secondary/40 p-10 text-center text-muted-foreground">
+            Vi får akkurat nå ikke hentet annonsene våre. Ring oss gjerne, så finner vi bilen sammen.
+          </p>
+        )}
+
+        {!isError && !isPending && listings.length === 0 && (
+          <p className="rounded-[24px] border border-hairline bg-secondary/40 p-10 text-center text-muted-foreground">
+            Ingen aktive annonser akkurat nå. Nye biler kommer inn fortløpende.
+          </p>
+        )}
+
         <div className="grid gap-8 md:gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {cars.map((c, i) => (
-            <Reveal key={c.id} delay={i * 90} className="h-full">
-              <CarCard car={c} />
-            </Reveal>
-          ))}
+          {isPending
+            ? [0, 1, 2].map((i) => <FinnPlaceholderCard key={i} />)
+            : listings.slice(0, 6).map((l, i) => (
+                <Reveal key={l.id} delay={i * 90} className="h-full">
+                  <FinnCard listing={l} />
+                </Reveal>
+              ))}
         </div>
 
         <div className="mt-12 md:hidden">
@@ -237,7 +263,7 @@ function About() {
           <div className="mt-14 grid grid-cols-3 divide-x divide-hairline border-y border-hairline">
             <Stat number="15+" label="År i bransjen" />
             <Stat number="500+" label="Fornøyde kunder" />
-            <Stat number="4,8/5" label="Kundeanmeldelser" />
+            <Stat number="5/5" label="Kundeanmeldelser" />
           </div>
         </Reveal>
 
@@ -245,14 +271,19 @@ function About() {
           <div className="relative">
             <div className="aspect-[4/5] overflow-hidden rounded-[28px] border border-hairline shadow-float">
               <img
-                src={gl350}
-                alt="Bruktbil fra Auto Globe AS"
+                src={hyundai}
+                alt="Hvit Hyundai Tucson bruktbil fra Auto Globe AS i Torp ved Sandefjord"
                 className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
                 loading="lazy"
               />
             </div>
             <div className="hidden lg:block absolute -bottom-10 -left-10 w-52 overflow-hidden rounded-3xl border border-hairline shadow-float bg-background">
-              <img src={e200} alt="" className="aspect-[4/3] w-full object-cover" loading="lazy" />
+              <img
+                src={nokler}
+                alt="Bilnøkler med Auto Globe-nøkkelring overrekkes til fornøyd kunde"
+                className="aspect-[4/3] w-full object-cover"
+                loading="lazy"
+              />
             </div>
           </div>
         </Reveal>
