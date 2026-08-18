@@ -1,11 +1,18 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { RefreshCw } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { ArrowUpRight, RefreshCw } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { CarCard } from "@/components/site/CarCard";
 import { Reveal } from "@/components/site/Reveal";
 import { cars } from "@/lib/cars";
-import { FINN_ENABLED, type FinnListing } from "@/lib/finn";
+import {
+  fetchFinnListings,
+  formatFinnKm,
+  formatFinnPrice,
+  type FinnListing,
+} from "@/lib/finn";
+
 
 export const Route = createFileRoute("/biler/")({
   head: () => ({
