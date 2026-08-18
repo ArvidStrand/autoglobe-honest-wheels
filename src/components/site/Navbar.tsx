@@ -42,9 +42,10 @@ export function Navbar({ transparentOverHero = false }: { transparentOverHero?: 
       >
         <Link to="/" className="flex items-center" onClick={() => setOpen(false)}>
           <Logo
+            variant={solid ? "dark" : "light"}
             className={cn(
               "w-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
-              scrolled ? "h-11 md:h-14" : "h-12 md:h-16",
+              scrolled ? "h-9 md:h-11" : "h-10 md:h-12",
             )}
           />
 

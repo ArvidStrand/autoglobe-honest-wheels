@@ -8,7 +8,7 @@ export function Footer() {
       <div className="h-1 w-full bg-brand" />
       <div className="container-page py-20 md:py-24 grid gap-14 md:gap-10 md:grid-cols-4">
         <div className="md:col-span-1">
-          <Logo className="h-14 w-auto" />
+          <Logo variant="light" className="h-12 w-auto" />
           <p className="mt-6 text-[15px] text-background/60 leading-[1.75] max-w-[32ch]">
             Kvalitetssikrede bruktbiler med ærlig service og trygg handel.
           </p>
