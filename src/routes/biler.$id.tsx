@@ -56,6 +56,7 @@ export const Route = createFileRoute("/biler/$id")({
           { name: "twitter:card", content: "summary_large_image" },
         ],
         links,
+        scripts: [{ type: "application/ld+json", children: JSON.stringify(breadcrumb) }],
       };
     }
 
