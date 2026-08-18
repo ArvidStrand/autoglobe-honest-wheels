@@ -159,15 +159,26 @@ async function cached<T>(key: string, loader: () => Promise<T>): Promise<T> {
 export async function getFinnListings(): Promise<FinnListing[]> {
   return cached("listings", async () => {
     const xml = await finnFetch(`/search/car-norway?orgId=${FINN_ORG_ID}&rows=100`);
-    return [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)]
+    const base = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)]
       .map((m) => parseEntry(m[1]!))
-      .filter((l): l is FinnListing => {
-        if (!l) return false;
-        return true;
-      })
+      .filter((l): l is FinnListing => l !== null)
       .filter((l) => !isSold(xml, l.id));
+
+    // Berik med komplett annonsedata (bilder, girkasse, utstyr, beskrivelse).
+    const enriched = await Promise.all(
+      base.map(async (l) => {
+        try {
+          const full = await getFinnListing(l.id);
+          return full ? { ...l, ...full } : l;
+        } catch {
+          return l;
+        }
+      }),
+    );
+    return enriched;
   });
 }
+
 
 function isSold(feedXml: string, id: string) {
   const entry = feedXml
