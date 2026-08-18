@@ -5,8 +5,8 @@ import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
 import { company } from "@/lib/company";
 
-import lokalet from "@/assets/lokalet.png.asset.json";
-import handhilse from "@/assets/handhilse.gif.asset.json";
+import lokalet from "@/assets/lokalet.jpg";
+import handhilse from "@/assets/handhilse.mp4";
 
 export const Route = createFileRoute("/om-oss")({
   head: () => ({
@@ -65,7 +65,7 @@ function Lokalet() {
         <Reveal className="lg:col-span-7">
           <div className="overflow-hidden rounded-[28px] border border-hairline shadow-float">
             <img
-              src={lokalet.url}
+              src={lokalet}
               alt="Auto Globe AS sitt lokale i Sulfatveien 29 på Torp, med biler oppstilt utenfor i skumringen"
               className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.03]"
               loading="lazy"
@@ -189,11 +189,15 @@ function Handshake() {
 
         <Reveal className="lg:col-span-7 lg:order-1">
           <div className="overflow-hidden rounded-[28px] border border-hairline shadow-float bg-muted">
-            <img
-              src={handhilse.url}
-              alt="Selger fra Auto Globe AS håndhilser på en fornøyd kunde"
+            <video
+              src={handhilse}
+              aria-label="Selger fra Auto Globe AS håndhilser på en fornøyd kunde"
               className="h-full w-full object-cover"
-              loading="lazy"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="none"
             />
           </div>
         </Reveal>
