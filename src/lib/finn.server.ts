@@ -122,7 +122,7 @@ async function finnFetch(path: string): Promise<string> {
   const apiKey = process.env["FINN_API_KEY"];
   if (!apiKey) throw new Error("finn_not_configured");
   const res = await fetch(`${FINN_BASE}${path}`, {
-    headers: { "X-FINN-apikey": apiKey, accept: "application/xml" },
+    headers: { "X-FINN-apikey": apiKey },
   });
   if (!res.ok) throw new Error(`finn_http_${res.status}`);
   return res.text();
