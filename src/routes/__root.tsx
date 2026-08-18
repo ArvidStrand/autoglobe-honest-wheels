@@ -100,9 +100,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "AutoDealer",
+          "@id": "https://autoglobe.no/#autodealer",
           name: "Auto Globe AS",
+          legalName: "AUTO-GLOBE AS",
           alternateName: ["Autoglobe", "AUTO-GLOBE AS", "Auto Globe"],
           url: "https://autoglobe.no/",
+          logo: "https://autoglobe.no/favicon.png",
+          image: "https://autoglobe.no/favicon.png",
           telephone: "+4798406472",
           email: "post@autoglobe.no",
           vatID: "NO937120443MVA",
@@ -131,10 +135,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           ],
         }),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://autoglobe.no/#website",
+          name: "Auto Globe AS",
+          url: "https://autoglobe.no/",
+          inLanguage: "nb-NO",
+          publisher: { "@id": "https://autoglobe.no/#autodealer" },
+        }),
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/favicon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

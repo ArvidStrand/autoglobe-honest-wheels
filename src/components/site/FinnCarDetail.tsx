@@ -20,12 +20,16 @@ function Shell({ children }: { children: React.ReactNode }) {
       <Navbar />
       <main className="section-top pb-24 md:pb-36">
         <div className="container-page">
-          <Link
-            to="/biler"
-            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" /> Tilbake til alle biler
-          </Link>
+          <nav aria-label="Brødsmuler" className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Link to="/" className="transition-colors hover:text-foreground">Hjem</Link>
+            <span aria-hidden>/</span>
+            <Link
+              to="/biler"
+              className="inline-flex items-center gap-2 font-medium transition-colors hover:text-foreground"
+            >
+              <ArrowLeft className="h-4 w-4" /> Våre biler
+            </Link>
+          </nav>
           {children}
         </div>
       </main>
@@ -103,8 +107,10 @@ export function FinnCarDetail({ id }: { id: string }) {
               <div className="overflow-hidden rounded-[28px] border border-hairline bg-muted shadow-float">
                 <img
                   src={images[active]}
-                  alt={`${car.title} hos Auto Globe AS`}
+                  alt={`${car.title}${car.year ? ` ${car.year}` : ""} bruktbil til salgs hos Auto Globe AS i Torp ved Sandefjord`}
                   className="aspect-[16/11] w-full object-cover"
+                  fetchPriority="high"
+                  decoding="async"
                 />
               </div>
               {images.length > 1 && (

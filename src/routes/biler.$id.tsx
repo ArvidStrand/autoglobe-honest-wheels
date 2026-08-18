@@ -26,6 +26,20 @@ export const Route = createFileRoute("/biler/$id")({
     const url = `${SITE}/biler/${params.id}`;
     const car = loaderData?.listing;
     const links = [{ rel: "canonical", href: url }];
+    const breadcrumb = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Hjem", item: `${SITE}/` },
+        { "@type": "ListItem", position: 2, name: "Våre biler", item: `${SITE}/biler` },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: car?.title ?? "Bruktbil",
+          item: url,
+        },
+      ],
+    };
 
     if (!car) {
       return {
@@ -42,6 +56,7 @@ export const Route = createFileRoute("/biler/$id")({
           { name: "twitter:card", content: "summary_large_image" },
         ],
         links,
+        scripts: [{ type: "application/ld+json", children: JSON.stringify(breadcrumb) }],
       };
     }
 
@@ -106,7 +121,10 @@ export const Route = createFileRoute("/biler/$id")({
     return {
       meta,
       links,
-      scripts: [{ type: "application/ld+json", children: JSON.stringify(vehicle) }],
+      scripts: [
+        { type: "application/ld+json", children: JSON.stringify(vehicle) },
+        { type: "application/ld+json", children: JSON.stringify(breadcrumb) },
+      ],
     };
   },
 
