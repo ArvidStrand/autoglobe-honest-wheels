@@ -122,9 +122,16 @@ async function finnFetch(path: string): Promise<string> {
   const apiKey = process.env["FINN_API_KEY"];
   if (!apiKey) throw new Error("finn_not_configured");
   const res = await fetch(`${FINN_BASE}${path}`, {
-    headers: { "X-FINN-apikey": apiKey },
+    headers: {
+      "X-FINN-apikey": apiKey,
+      accept: "*/*",
+      "user-agent": "autoglobe-website/1.0",
+    },
   });
-  if (!res.ok) throw new Error(`finn_http_${res.status}`);
+  if (!res.ok) {
+    console.error("[finn] body:", (await res.text()).slice(0, 300));
+    throw new Error(`finn_http_${res.status}`);
+  }
   return res.text();
 }
 
