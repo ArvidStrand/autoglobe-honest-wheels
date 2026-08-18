@@ -1,8 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
-import { cars } from "@/lib/cars";
 
-const BASE_URL = "";
+const BASE_URL = "https://autoglobe-honest-wheels.lovable.app";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -14,7 +13,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/selg", changefreq: "monthly", priority: "0.9" },
           { path: "/om-oss", changefreq: "monthly", priority: "0.6" },
           { path: "/kontakt", changefreq: "monthly", priority: "0.7" },
-          ...cars.map((c) => ({ path: `/biler/${c.id}`, changefreq: "weekly", priority: "0.8" })),
         ];
         const urls = entries.map((e) =>
           `  <url><loc>${BASE_URL}${e.path}</loc><changefreq>${e.changefreq}</changefreq><priority>${e.priority}</priority></url>`

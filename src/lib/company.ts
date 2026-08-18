@@ -1,6 +1,7 @@
 export const company = {
   name: "Auto Globe AS",
   owner: "Rezwhan Mohamed",
+  orgNumber: "937 120 443",
   email: "post@autoglobe.no",
   phone: "984 06 472",
   phoneHref: "tel:+4798406472",
