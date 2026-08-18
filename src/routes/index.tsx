@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Auto Globe AS – Bruktbilforhandler i Torp, Fredrikstad" },
       {
         property: "og:description",
-        content: "Bruktbiler til salgs i Sandefjord-området. Finansiering, innbytte og ærlig service hos Auto Globe AS.",
+        content: "Bruktbiler til salgs i Fredrikstad-området. Finansiering, innbytte og ærlig service hos Auto Globe AS.",
       },
       { property: "og:url", content: "https://autoglobe.no/" },
     ],

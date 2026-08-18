@@ -8,9 +8,9 @@ import { Reveal } from "@/components/site/Reveal";
 export const Route = createFileRoute("/selg")({
   head: () => ({
     meta: [
-      { title: "Selg bilen din i Sandefjord – Auto Globe AS i Torp" },
+      { title: "Selg bilen din i Fredrikstad – Auto Globe AS i Torp" },
       { name: "description", content: "Få et uforpliktende tilbud på bilen din. Auto Globe AS i Torp, Fredrikstad kjøper biler direkte fra privatpersoner, og tilbyr innbytte." },
-      { property: "og:title", content: "Selg bilen din i Sandefjord – Auto Globe AS" },
+      { property: "og:title", content: "Selg bilen din i Fredrikstad – Auto Globe AS" },
       { property: "og:description", content: "Rask og enkel prosess. Få et uforpliktende tilbud på bilen din." },
       { property: "og:url", content: "https://autoglobe.no/selg" },
       { property: "og:type", content: "website" },

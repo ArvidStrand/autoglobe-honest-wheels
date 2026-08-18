@@ -118,7 +118,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             addressLocality: "Torp",
             addressCountry: "NO",
           },
-          areaServed: ["Torp", "Sandefjord", "Vestfold"],
+          areaServed: ["Torp", "Fredrikstad", "Østfold"],
           openingHoursSpecification: [
             {
               "@type": "OpeningHoursSpecification",
