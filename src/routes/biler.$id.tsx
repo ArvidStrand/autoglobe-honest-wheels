@@ -5,7 +5,7 @@ import { FinnCarDetail } from "@/components/site/FinnCarDetail";
 import { fetchFinnListing, formatFinnKm, formatFinnPrice, type FinnListing } from "@/lib/finn";
 import { getFinnAdFn } from "@/lib/finn.functions";
 
-const SITE = "https://autoglobe-honest-wheels.lovable.app";
+const SITE = "https://autoglobe.no";
 
 export const Route = createFileRoute("/biler/$id")({
   loader: async ({ params }) => {

@@ -102,7 +102,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "AutoDealer",
           name: "Auto Globe AS",
           alternateName: ["Autoglobe", "AUTO-GLOBE AS", "Auto Globe"],
-          url: "https://autoglobe-honest-wheels.lovable.app/",
+          url: "https://autoglobe.no/",
           telephone: "+4798406472",
           email: "post@autoglobe.no",
           vatID: "NO937120443MVA",

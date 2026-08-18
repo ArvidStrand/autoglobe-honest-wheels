@@ -26,9 +26,9 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Bruktbiler til salgs i Sandefjord-området. Finansiering, innbytte og ærlig service hos Auto Globe AS.",
       },
-      { property: "og:url", content: "https://autoglobe-honest-wheels.lovable.app/" },
+      { property: "og:url", content: "https://autoglobe.no/" },
     ],
-    links: [{ rel: "canonical", href: "https://autoglobe-honest-wheels.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://autoglobe.no/" }],
   }),
   component: HomePage,
 });
