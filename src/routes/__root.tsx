@@ -100,9 +100,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "AutoDealer",
+          "@id": "https://autoglobe.no/#autodealer",
           name: "Auto Globe AS",
+          legalName: "AUTO-GLOBE AS",
           alternateName: ["Autoglobe", "AUTO-GLOBE AS", "Auto Globe"],
           url: "https://autoglobe.no/",
+          logo: "https://autoglobe.no/favicon.png",
+          image: "https://autoglobe.no/favicon.png",
           telephone: "+4798406472",
           email: "post@autoglobe.no",
           vatID: "NO937120443MVA",
