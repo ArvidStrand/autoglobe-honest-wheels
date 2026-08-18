@@ -7,6 +7,8 @@ import { LeadForm } from "@/components/site/LeadForm";
 import { Reveal } from "@/components/site/Reveal";
 import { cars, formatKm, formatPrice, getCar } from "@/lib/cars";
 import { company } from "@/lib/company";
+import { FinnCarDetail } from "@/components/site/FinnCarDetail";
+
 
 export const Route = createFileRoute("/biler/$id")({
   loader: ({ params }) => {
