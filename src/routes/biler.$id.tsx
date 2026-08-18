@@ -67,12 +67,22 @@ export const Route = createFileRoute("/biler/$id")({
       <Footer />
     </>
   ),
-  component: CarDetail,
+  component: CarDetailRoute,
 });
+
+function CarDetailRoute() {
+  const data = Route.useLoaderData() as {
+    car: (typeof cars)[number] | null;
+    finnId: string | null;
+  };
+  if (!data.car && data.finnId) return <FinnCarDetail id={data.finnId} />;
+  return <CarDetail />;
+}
 
 function CarDetail() {
   const { car } = Route.useLoaderData() as { car: (typeof cars)[number] };
   const related = cars.filter((c) => c.id !== car.id).slice(0, 3);
+
 
   return (
     <>
