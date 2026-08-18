@@ -17,6 +17,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BilerIndexRouteImport } from './routes/biler.index'
 import { Route as BilerIdRouteImport } from './routes/biler.$id'
 import { Route as ApiPublicLeadRouteImport } from './routes/api/public/lead'
+import { Route as ApiPublicFinnListingsRouteImport } from './routes/api/public/finn.listings'
+import { Route as ApiPublicFinnAdIdRouteImport } from './routes/api/public/finn.ad.$id'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -58,6 +60,16 @@ const ApiPublicLeadRoute = ApiPublicLeadRouteImport.update({
   path: '/api/public/lead',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicFinnListingsRoute = ApiPublicFinnListingsRouteImport.update({
+  id: '/api/public/finn/listings',
+  path: '/api/public/finn/listings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicFinnAdIdRoute = ApiPublicFinnAdIdRouteImport.update({
+  id: '/api/public/finn/ad/$id',
+  path: '/api/public/finn/ad/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -68,6 +80,8 @@ export interface FileRoutesByFullPath {
   '/biler/$id': typeof BilerIdRoute
   '/biler/': typeof BilerIndexRoute
   '/api/public/lead': typeof ApiPublicLeadRoute
+  '/api/public/finn/listings': typeof ApiPublicFinnListingsRoute
+  '/api/public/finn/ad/$id': typeof ApiPublicFinnAdIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -78,6 +92,8 @@ export interface FileRoutesByTo {
   '/biler/$id': typeof BilerIdRoute
   '/biler': typeof BilerIndexRoute
   '/api/public/lead': typeof ApiPublicLeadRoute
+  '/api/public/finn/listings': typeof ApiPublicFinnListingsRoute
+  '/api/public/finn/ad/$id': typeof ApiPublicFinnAdIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +105,8 @@ export interface FileRoutesById {
   '/biler/$id': typeof BilerIdRoute
   '/biler/': typeof BilerIndexRoute
   '/api/public/lead': typeof ApiPublicLeadRoute
+  '/api/public/finn/listings': typeof ApiPublicFinnListingsRoute
+  '/api/public/finn/ad/$id': typeof ApiPublicFinnAdIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +119,8 @@ export interface FileRouteTypes {
     | '/biler/$id'
     | '/biler/'
     | '/api/public/lead'
+    | '/api/public/finn/listings'
+    | '/api/public/finn/ad/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +131,8 @@ export interface FileRouteTypes {
     | '/biler/$id'
     | '/biler'
     | '/api/public/lead'
+    | '/api/public/finn/listings'
+    | '/api/public/finn/ad/$id'
   id:
     | '__root__'
     | '/'
@@ -121,6 +143,8 @@ export interface FileRouteTypes {
     | '/biler/$id'
     | '/biler/'
     | '/api/public/lead'
+    | '/api/public/finn/listings'
+    | '/api/public/finn/ad/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -132,6 +156,8 @@ export interface RootRouteChildren {
   BilerIdRoute: typeof BilerIdRoute
   BilerIndexRoute: typeof BilerIndexRoute
   ApiPublicLeadRoute: typeof ApiPublicLeadRoute
+  ApiPublicFinnListingsRoute: typeof ApiPublicFinnListingsRoute
+  ApiPublicFinnAdIdRoute: typeof ApiPublicFinnAdIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -192,6 +218,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicLeadRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/finn/listings': {
+      id: '/api/public/finn/listings'
+      path: '/api/public/finn/listings'
+      fullPath: '/api/public/finn/listings'
+      preLoaderRoute: typeof ApiPublicFinnListingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/finn/ad/$id': {
+      id: '/api/public/finn/ad/$id'
+      path: '/api/public/finn/ad/$id'
+      fullPath: '/api/public/finn/ad/$id'
+      preLoaderRoute: typeof ApiPublicFinnAdIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -204,6 +244,8 @@ const rootRouteChildren: RootRouteChildren = {
   BilerIdRoute: BilerIdRoute,
   BilerIndexRoute: BilerIndexRoute,
   ApiPublicLeadRoute: ApiPublicLeadRoute,
+  ApiPublicFinnListingsRoute: ApiPublicFinnListingsRoute,
+  ApiPublicFinnAdIdRoute: ApiPublicFinnAdIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
