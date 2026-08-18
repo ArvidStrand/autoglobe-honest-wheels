@@ -3,9 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowUpRight, RefreshCw } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
-import { CarCard } from "@/components/site/CarCard";
 import { Reveal } from "@/components/site/Reveal";
-import { cars } from "@/lib/cars";
 import {
   fetchFinnListings,
   formatFinnKm,
@@ -29,39 +27,6 @@ export const Route = createFileRoute("/biler/")({
 });
 
 function CarsPage() {
-  return (
-    <>
-      <Navbar />
-      <main className="section-top pb-24 md:pb-36">
-        <div className="container-page">
-          <Reveal className="max-w-3xl">
-            <p className="eyebrow">Bilutvalg</p>
-            <h1 className="mt-5 text-[44px] sm:text-6xl md:text-[72px] font-semibold tracking-[-0.035em] leading-[1.02]">
-              Våre biler
-            </h1>
-            <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-[1.75] max-w-[54ch]">
-              {cars.length} biler tilgjengelig. Alle biler er nøye kontrollert og
-              leveres nybilklargjort.
-            </p>
-          </Reveal>
-
-          <div className="mt-16 md:mt-24 grid gap-8 md:gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {cars.map((c, i) => (
-              <Reveal key={c.id} delay={i * 90} className="h-full">
-                <CarCard car={c} />
-              </Reveal>
-            ))}
-          </div>
-
-          <FinnSection />
-        </div>
-      </main>
-      <Footer />
-    </>
-  );
-}
-
-function FinnSection() {
   const { data, isPending, isError } = useQuery({
     queryKey: ["finn-listings"],
     queryFn: fetchFinnListings,
@@ -72,45 +37,45 @@ function FinnSection() {
   const listings = data ?? [];
 
   return (
-    <section className="mt-24 md:mt-36 border-t border-hairline pt-16 md:pt-24">
-      <Reveal className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-        <div className="max-w-2xl">
-          <p className="eyebrow">Direkte fra FINN</p>
-          <h2 className="mt-5 text-[32px] sm:text-[44px] font-semibold tracking-[-0.03em] leading-[1.06]">
-            Alle våre annonser
-          </h2>
-          <p className="mt-5 text-lg text-muted-foreground leading-[1.75] max-w-[52ch]">
-            Her hentes alle våre aktive FINN-annonser inn automatisk, med bilde, tittel og pris.
-          </p>
+    <>
+      <Navbar />
+      <main className="section-top pb-24 md:pb-36">
+        <div className="container-page">
+          <Reveal className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <h1 className="text-[44px] sm:text-6xl md:text-[72px] font-semibold tracking-[-0.035em] leading-[1.02]">
+              Våre biler
+            </h1>
+            <span className="inline-flex items-center gap-2 self-start rounded-full border border-hairline bg-secondary/60 px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              <RefreshCw className={`h-3.5 w-3.5 text-brand ${isPending ? "animate-spin" : ""}`} />
+              {isPending ? "Oppdaterer" : isError ? "Midlertidig utilgjengelig" : `${listings.length} aktive`}
+            </span>
+          </Reveal>
+
+          {isError && (
+            <p className="mt-14 rounded-[24px] border border-hairline bg-secondary/40 p-10 text-center text-muted-foreground">
+              Vi får akkurat nå ikke hentet annonsene våre. Ring oss gjerne, så finner vi bilen sammen.
+            </p>
+          )}
+
+          {!isError && !isPending && listings.length === 0 && (
+            <p className="mt-14 rounded-[24px] border border-hairline bg-secondary/40 p-10 text-center text-muted-foreground">
+              Ingen aktive annonser akkurat nå. Nye biler kommer inn fortløpende.
+            </p>
+          )}
+
+          <div className="mt-14 md:mt-18 grid gap-8 md:gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            {isPending
+              ? [0, 1, 2].map((i) => <FinnPlaceholderCard key={i} />)
+              : listings.map((l, i) => (
+                  <Reveal key={l.id} delay={i * 70} className="h-full">
+                    <FinnCard listing={l} />
+                  </Reveal>
+                ))}
+          </div>
         </div>
-        <span className="inline-flex items-center gap-2 self-start rounded-full border border-hairline bg-secondary/60 px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-          <RefreshCw className={`h-3.5 w-3.5 text-brand ${isPending ? "animate-spin" : ""}`} />
-          {isPending ? "Oppdaterer" : isError ? "Midlertidig utilgjengelig" : `${listings.length} aktive`}
-        </span>
-      </Reveal>
-
-      {isError && (
-        <p className="mt-14 rounded-[24px] border border-hairline bg-secondary/40 p-10 text-center text-muted-foreground">
-          Vi får akkurat nå ikke hentet annonsene våre. Ring oss gjerne, så finner vi bilen sammen.
-        </p>
-      )}
-
-      {!isError && !isPending && listings.length === 0 && (
-        <p className="mt-14 rounded-[24px] border border-hairline bg-secondary/40 p-10 text-center text-muted-foreground">
-          Ingen aktive annonser akkurat nå. Nye biler kommer inn fortløpende.
-        </p>
-      )}
-
-      <div className="mt-14 grid gap-8 md:gap-10 sm:grid-cols-2 lg:grid-cols-3">
-        {isPending
-          ? [0, 1, 2].map((i) => <FinnPlaceholderCard key={i} />)
-          : listings.map((l, i) => (
-              <Reveal key={l.id} delay={i * 70} className="h-full">
-                <FinnCard listing={l} />
-              </Reveal>
-            ))}
-      </div>
-    </section>
+      </main>
+      <Footer />
+    </>
   );
 }
 
