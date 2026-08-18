@@ -11,13 +11,15 @@ import handhilse from "@/assets/handhilse.mp4";
 export const Route = createFileRoute("/om-oss")({
   head: () => ({
     meta: [
-      { title: "Om oss – Auto Globe AS" },
-      { name: "description", content: "Auto Globe AS er en lokal bruktbilforhandler i Torp med mange års erfaring og fokus på ærlig kundebehandling." },
-      { property: "og:title", content: "Om oss – Auto Globe AS" },
-      { property: "og:description", content: "Lokal bruktbilforhandler i Torp med fokus på ærlig service." },
+      { title: "Om Auto Globe AS – bruktbilforhandler i Torp, Sandefjord" },
+      { name: "description", content: "Auto Globe AS er en lokal bruktbilforhandler i Torp ved Sandefjord med mange års erfaring og fokus på ærlig kundebehandling." },
+      { property: "og:title", content: "Om Auto Globe AS – bruktbilforhandler i Torp, Sandefjord" },
+      { property: "og:description", content: "Lokal bruktbilforhandler i Torp ved Sandefjord med fokus på ærlig service." },
+      { property: "og:url", content: "https://autoglobe-honest-wheels.lovable.app/om-oss" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://autoglobe-honest-wheels.lovable.app/om-oss" }],
   }),
   component: AboutPage,
 });
