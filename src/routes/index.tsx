@@ -335,7 +335,7 @@ function MapContact() {
               </a>
 
               <ul className="mt-8 space-y-7">
-                <ContactItem icon={MapPin} title="Adresse" lines={[company.address.street, `${company.address.zip} ${company.address.city}`]} />
+                <ContactItem icon={MapPin} title="Adresse" lines={[company.address.street, `${company.address.zip} ${company.address.city}, ${company.address.municipality}`]} />
                 <ContactItem icon={Mail} title="E-post" lines={[company.email]} href={`mailto:${company.email}`} />
                 <ContactItem
                   icon={Clock}

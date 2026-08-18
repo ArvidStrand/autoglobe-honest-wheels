@@ -55,7 +55,7 @@ function ContactPage() {
               </a>
 
               <Info icon={Mail} title="E-post" value={company.email} href={`mailto:${company.email}`} />
-              <Info icon={MapPin} title="Adresse" value={`${company.address.street}, ${company.address.zip} ${company.address.city}`} />
+              <Info icon={MapPin} title="Adresse" value={`${company.address.street}, ${company.address.zip} ${company.address.city}, ${company.address.municipality}`} />
 
               <div className="surface-card p-8">
                 <div className="flex items-center gap-3">
