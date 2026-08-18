@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://autoglobe-honest-wheels.lovable.app/sitemap.xml

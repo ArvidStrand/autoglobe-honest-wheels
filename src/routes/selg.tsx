@@ -8,11 +8,15 @@ import { Reveal } from "@/components/site/Reveal";
 export const Route = createFileRoute("/selg")({
   head: () => ({
     meta: [
-      { title: "Selg bilen din – Auto Globe AS" },
-      { name: "description", content: "Få et uforpliktende tilbud på bilen din. Auto Globe AS kjøper biler direkte fra privatpersoner." },
-      { property: "og:title", content: "Selg bilen din – Auto Globe AS" },
+      { title: "Selg bilen din i Sandefjord – Auto Globe AS i Torp" },
+      { name: "description", content: "Få et uforpliktende tilbud på bilen din. Auto Globe AS i Torp ved Sandefjord kjøper biler direkte fra privatpersoner, og tilbyr innbytte." },
+      { property: "og:title", content: "Selg bilen din i Sandefjord – Auto Globe AS" },
       { property: "og:description", content: "Rask og enkel prosess. Få et uforpliktende tilbud på bilen din." },
+      { property: "og:url", content: "https://autoglobe-honest-wheels.lovable.app/selg" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://autoglobe-honest-wheels.lovable.app/selg" }],
   }),
   component: SellPage,
 });

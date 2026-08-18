@@ -48,7 +48,7 @@ export function Footer() {
 
       <div className="border-t border-background/12">
         <div className="container-page py-8 flex flex-col md:flex-row items-center justify-between gap-3 text-[13px] text-background/50">
-          <p>© {new Date().getFullYear()} Auto Globe AS. Org. nr. — Alle rettigheter reservert.</p>
+          <p>© {new Date().getFullYear()} Auto Globe AS. Org.nr. {company.orgNumber}. Alle rettigheter reservert.</p>
           <p>Personvern</p>
         </div>
       </div>

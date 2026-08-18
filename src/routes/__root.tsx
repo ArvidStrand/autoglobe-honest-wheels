@@ -91,6 +91,46 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:site_name", content: "Auto Globe AS" },
+      { property: "og:locale", content: "nb_NO" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "AutoDealer",
+          name: "Auto Globe AS",
+          alternateName: ["Autoglobe", "AUTO-GLOBE AS", "Auto Globe"],
+          url: "https://autoglobe-honest-wheels.lovable.app/",
+          telephone: "+4798406472",
+          email: "post@autoglobe.no",
+          vatID: "NO937120443MVA",
+          identifier: "937 120 443",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Sulfatveien 29",
+            postalCode: "1658",
+            addressLocality: "Torp",
+            addressCountry: "NO",
+          },
+          areaServed: ["Torp", "Sandefjord", "Vestfold"],
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              opens: "09:00",
+              closes: "17:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Saturday",
+              opens: "10:00",
+              closes: "15:00",
+            },
+          ],
+        }),
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
