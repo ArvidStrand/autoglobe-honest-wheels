@@ -121,7 +121,10 @@ export const Route = createFileRoute("/biler/$id")({
     return {
       meta,
       links,
-      scripts: [{ type: "application/ld+json", children: JSON.stringify(vehicle) }],
+      scripts: [
+        { type: "application/ld+json", children: JSON.stringify(vehicle) },
+        { type: "application/ld+json", children: JSON.stringify(breadcrumb) },
+      ],
     };
   },
 
