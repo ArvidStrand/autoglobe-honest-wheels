@@ -12,9 +12,9 @@ export const Route = createFileRoute("/biler/")({
   head: () => ({
     meta: [
       { title: "Bruktbiler til salgs i Sandefjord – Auto Globe AS, Torp" },
-      { name: "description", content: "Se alle aktive bruktbiler til salgs hos Auto Globe AS i Torp ved Sandefjord. Oppdatert utvalg med pris, årsmodell, km-stand og utstyr." },
+      { name: "description", content: "Se alle aktive bruktbiler til salgs hos Auto Globe AS i Torp, Fredrikstad. Oppdatert utvalg med pris, årsmodell, km-stand og utstyr." },
       { property: "og:title", content: "Bruktbiler til salgs i Sandefjord – Auto Globe AS" },
-      { property: "og:description", content: "Oppdatert utvalg av bruktbiler hos Auto Globe AS i Torp ved Sandefjord." },
+      { property: "og:description", content: "Oppdatert utvalg av bruktbiler hos Auto Globe AS i Torp, Fredrikstad." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://autoglobe.no/biler" },
       { name: "twitter:card", content: "summary_large_image" },

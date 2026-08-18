@@ -48,7 +48,7 @@ export const Route = createFileRoute("/biler/$id")({
           {
             name: "description",
             content:
-              "Se detaljer, utstyr og bilder for denne bruktbilen hos Auto Globe AS i Torp ved Sandefjord.",
+              "Se detaljer, utstyr og bilder for denne bruktbilen hos Auto Globe AS i Torp, Fredrikstad.",
           },
           { property: "og:title", content: "Bruktbil til salgs – Auto Globe AS" },
           { property: "og:url", content: url },
@@ -66,7 +66,7 @@ export const Route = createFileRoute("/biler/$id")({
     const title = `${car.title} – ${formatFinnPrice(car.priceNok)} – Auto Globe AS`;
     const description = `${car.title}${facts ? `. ${facts}` : ""}. ${formatFinnPrice(
       car.priceNok,
-    )}. Bruktbil til salgs hos Auto Globe AS i Torp ved Sandefjord.`;
+    )}. Bruktbil til salgs hos Auto Globe AS i Torp, Fredrikstad.`;
 
     const meta: Array<Record<string, string>> = [
       { title },
