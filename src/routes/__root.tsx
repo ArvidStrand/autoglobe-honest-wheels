@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { getGaMeasurementId } from "../lib/analytics.functions";
+import { initGoogleAnalytics, trackPageView } from "../lib/analytics";
 
 function NotFoundComponent() {
   return (
@@ -183,6 +185,22 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    let cancelled = false;
+    getGaMeasurementId().then((id) => {
+      if (!cancelled && id) initGoogleAnalytics(id);
+    });
+    const unsubscribe = router.subscribe("onResolved", ({ toLocation }) => {
+      trackPageView(toLocation.pathname + toLocation.searchStr);
+    });
+    return () => {
+      cancelled = true;
+      unsubscribe();
+    };
+  }, [router]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
