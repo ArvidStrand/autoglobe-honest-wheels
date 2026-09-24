@@ -185,6 +185,22 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    let cancelled = false;
+    getGaMeasurementId().then((id) => {
+      if (!cancelled && id) initGoogleAnalytics(id);
+    });
+    const unsubscribe = router.subscribe("onResolved", ({ toLocation }) => {
+      trackPageView(toLocation.pathname + toLocation.searchStr);
+    });
+    return () => {
+      cancelled = true;
+      unsubscribe();
+    };
+  }, [router]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
