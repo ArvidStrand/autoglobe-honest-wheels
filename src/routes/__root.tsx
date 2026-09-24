@@ -11,8 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { getGaMeasurementId } from "../lib/analytics.functions";
-import { initGoogleAnalytics, trackPageView } from "../lib/analytics";
+import { GA_MEASUREMENT_ID, trackPageView } from "../lib/analytics";
 
 function NotFoundComponent() {
   return (
@@ -97,6 +96,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:locale", content: "nb_NO" },
     ],
     scripts: [
+      {
+        async: true,
+        src: `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`,
+      },
+      {
+        children: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');`,
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify({
@@ -188,17 +194,16 @@ function RootComponent() {
   const router = useRouter();
 
   useEffect(() => {
-    let cancelled = false;
-    getGaMeasurementId().then((id) => {
-      if (!cancelled && id) initGoogleAnalytics(id);
-    });
+    // Initial page_view is sent by the static gtag snippet in <head>.
+    // Here we only track client-side navigations.
+    let lastPath = window.location.pathname + window.location.search;
     const unsubscribe = router.subscribe("onResolved", ({ toLocation }) => {
-      trackPageView(toLocation.pathname + toLocation.searchStr);
+      const path = toLocation.pathname + toLocation.searchStr;
+      if (path === lastPath) return;
+      lastPath = path;
+      trackPageView(path);
     });
-    return () => {
-      cancelled = true;
-      unsubscribe();
-    };
+    return () => unsubscribe();
   }, [router]);
 
   return (

@@ -5,6 +5,10 @@ declare global {
   }
 }
 
+// Public GA4 measurement ID (same value as GOOGLE_ANALYTICS_MEASUREMENT_ID).
+// Hardcoded so the tag is baked into the static HTML on every host (incl. Netlify).
+export const GA_MEASUREMENT_ID = "G-PWRSZXMVF2";
+
 let initialized = false;
 
 export function initGoogleAnalytics(measurementId: string) {
